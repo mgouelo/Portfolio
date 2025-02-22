@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #201318;
+    color: #FF92AD;
+}
+
+header {
+    background: #191114;
+    padding: 1rem 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none; /* Removes default bullets from list items */
+}
+  
+nav ul li {
+    margin: 0 1rem;
+}
+  
+nav ul li a {
+    text-decoration: none; /* Removes the usual underlining from links */
+}
+
+footer {
+    background: #191114;
+    text-align: center;
+    padding: 1rem 0;
+}
