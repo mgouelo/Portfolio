@@ -13,7 +13,12 @@ body {
 
 header {
     background: #191114;
-    padding: 1rem 0;
+    padding: 2rem 0;
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: bold;
 }
 
 nav ul {
@@ -21,13 +26,38 @@ nav ul {
     justify-content: center;
     list-style: none; /* Removes default bullets from list items */
 }
-  
+
 nav ul li {
     margin: 0 1rem;
 }
-  
+
 nav ul li a {
     text-decoration: none; /* Removes the usual underlining from links */
+    color: #FF92AD
+}
+
+.btn {
+    background-color: #381525;
+    border: 2px solid transparent;  /* Transparent border by default */
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    /*background-color: #2980b9;*/
+    transform: translateY(-2px);
+    border-color: #B0436E;  /* Change color while hover */
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+#about-me {
+    margin: 10%;
 }
 
 footer {
