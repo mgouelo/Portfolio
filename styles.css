@@ -4,15 +4,33 @@
     box-sizing: border-box;
 }
 
+/* All colors for the default White Mode */
+:root {
+    --bg-color: #FEF7F9;
+    --header-footer-color: #FFFCFD;
+    --text-color: #CB1D63;
+    --border-color: #E093B2;
+    --btn-color: #FFE9F0;
+}
+
+/* All colors for the Dark Mode */
+.dark-mode {
+    --bg-color: #201318;
+    --header-footer-color: #191114;
+    --text-color: #FF92AD;
+    --border-color: #B0436E;
+    --btn-color: #381525;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #201318;
-    color: #FF92AD;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 header {
-    background: #191114;
+    background: var(--header-footer-color);
     padding: 2rem 0;
 }
 
@@ -33,11 +51,11 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none; /* Removes the usual underlining from links */
-    color: #FF92AD
+    color: var(--text-color);
 }
 
 .btn {
-    background-color: #381525;
+    background-color: var(--btn-color);
     border: 2px solid transparent;  /* Transparent border by default */
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
@@ -49,7 +67,7 @@ nav ul li a {
 .btn:hover {
     /*background-color: #2980b9;*/
     transform: translateY(-2px);
-    border-color: #B0436E;  /* Change color while hover */
+    border-color: var(--border-color);  /* Change color while hover */
 }
 
 .btn:active {
@@ -61,7 +79,7 @@ nav ul li a {
 }
 
 footer {
-    background: #191114;
+    background: var(--header-footer-color);
     text-align: center;
     padding: 1rem 0;
 }
