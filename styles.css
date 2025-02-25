@@ -6,6 +6,7 @@
 
 /* All colors for the default White Mode */
 :root {
+    --btn-icon: url(img/sun-icon.png);
     --bg-color: #FEF7F9;
     --header-footer-color: #FFFCFD;
     --text-color: #CB1D63;
@@ -15,6 +16,7 @@
 
 /* All colors for the Dark Mode */
 .dark-mode {
+    --btn-icon: url(img/moon-icon.png);
     --bg-color: #201318;
     --header-footer-color: #191114;
     --text-color: #FF92AD;
@@ -34,15 +36,25 @@ header {
     padding: 2rem 0;
 }
 
-h2 {
-    font-size: 3rem;
-    font-weight: bold;
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative; /* Allow an absolute pos for the button */
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 nav ul {
     display: flex;
     justify-content: center;
     list-style: none; /* Removes default bullets from list items */
+    padding: 0;
 }
 
 nav ul li {
@@ -72,6 +84,25 @@ nav ul li a {
 
 .btn:active {
     transform: translateY(0);
+}
+
+.toggle-btn {
+    background: var(--btn-icon) no-repeat center;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    border: 2px solid transparent;  /* Transparent border by default */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    font-size: 1rem;
+    position: absolute;
+    right: 2rem;
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: bold;
 }
 
 #about-me {
