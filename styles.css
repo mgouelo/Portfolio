@@ -107,6 +107,25 @@ h2 {
 
 #about-me {
     margin: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.intro {
+    width: 50%;
+    height: auto;
+}
+
+.photo {
+    width: 50%;
+    height: auto;
+}
+
+.photo img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
 }
 
 footer {
