@@ -20,3 +20,14 @@ toggleBtn.addEventListener('click', () => {
         toggleBtn.title = 'Light Mode';
     }
 });
+
+
+
+// Zoom effect for the cv page
+const zoomElement = document.getElementById('zoom-area');
+const panzoom = Panzoom(zoomElement, {
+    maxScale: 3, // Zoom max
+    minScale: 1, // Zoom min
+});
+
+zoomElement.addEventListener('wheel', panzoom.zoomWithWheel);

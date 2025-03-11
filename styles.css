@@ -7,21 +7,21 @@
 /* All colors for the default White Mode */
 :root {
     --btn-icon: url(img/sun-icon.png);
-    --bg-color: #FEF7F9;
-    --header-footer-color: #FFFCFD;
-    --text-color: #CB1D63;
-    --border-color: #E093B2;
-    --btn-color: #FFE9F0;
+    --bg-color: #FEF7F9; /* color #2 */
+    --header-footer-color: #FFFCFD; /* color #1 */
+    --text-color: #CB1D63; /* color #11 */
+    --border-color: #E093B2; /* color #8 */
+    --btn-color: #FFE9F0; /* color #3 */
 }
 
 /* All colors for the Dark Mode */
 .dark-mode {
     --btn-icon: url(img/moon-icon.png);
-    --bg-color: #201318;
-    --header-footer-color: #191114;
-    --text-color: #FF92AD;
-    --border-color: #B0436E;
-    --btn-color: #381525;
+    --bg-color: #201318; /* color #2 */
+    --header-footer-color: #191114; /* color #1 */
+    --text-color: #FF92AD; /* color #11 */
+    --border-color: #B0436E; /* color #8 */
+    --btn-color: #381525; /* color #3 */
 }
 
 body {
@@ -126,6 +126,18 @@ h2 {
     object-fit: cover;
     width: 250px;
     height: 250px;
+}
+
+#zoom-area {
+    width: 80%;
+    max-width: 500px;
+    overflow: hidden; /* hide part of the cv which is outside*/
+    margin: auto;
+}
+
+#zoom-area img {
+    width: 100%;
+    cursor: grab;
 }
 
 footer {
