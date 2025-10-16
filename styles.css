@@ -1,0 +1,136 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+    --beige:#FFFAF0;
+    --red:#EF2A2B;
+    --black:#000000;
+    --white:#FFFFFF;
+}
+
+@font-face {
+    font-family: 'Azaret-Mono';
+    src: url('./fonts/Azeret_Mono/AzeretMono-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tan-Nimbus';
+    src: url('./fonts/Tan_Nimbus/tan-nimbus.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--red);
+    font-family: 'Tan-Nimbus';
+}
+
+h3 {
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    margin-top: 0;
+}
+
+a, p {
+    color: var(--black);
+    font-family: 'Azaret-Mono';
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    gap: 0.6rem;
+}
+
+p::before {
+  content: "★ ";
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+}
+
+section {
+    min-height: 100dvh;
+    width: 100%;
+    margin: 0;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.card {
+    background-color: var(--beige);
+    margin: 0;
+    padding: clamp(1rem, 4vw, 3rem);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------- FIRST PAGE ----------------------------*/
+
+#main-titles {
+    text-align: center;
+    justify-content: center;
+}
+
+#main-titles h1 {
+    margin: 0 0; 
+    font-size: clamp(40px, 10vw, 120px);
+    margin-bottom: 0.2em;
+}
+
+#main-titles h2 {
+    font-size: clamp(20px, 4vw, 48px);
+    font-family: 'Azaret-Mono';
+    color: var(--black);
+}
+
+.social-media {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+
+/* ---------------------------- SECOND PAGE ----------------------------*/
+
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    width: 100%;
+    /*max-width: 1200px;*/
+}
+
+.card-a {
+    grid-column: 1;
+    grid-row: 1;
+    align-items: start;
+}
+
+.card-b {
+    grid-column: 1;
+    grid-row: 2;
+    align-items: start;
+}
+
+.card-c {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-items: center;
+}
