@@ -236,35 +236,29 @@ section {
 
 /* ---------------------------- Skills portfolio ----------------------------*/
 
-/*
-.skills-grid {
+/* ===== Grid des cartes ===== */
+.skills-grid{
   width: 100%;
   margin-top: clamp(0.8rem, 2vw, 1.5rem);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: clamp(1rem, 2.5vw, 2rem);
+  justify-content: center;
 }
 
-
-.skill-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: .4rem;
-
+/* ===== Style commun à toutes les cartes ===== */
+.skill-card{
+  display: block; /* base neutre ; le layout sera géré par :not(.flip-card) ou .face */
   padding: clamp(1rem, 2.2vw, 1.4rem);
   border-radius: 18px;
   background: var(--white);
   color: var(--black);
   text-decoration: none;
-
   aspect-ratio: 4 / 3;
   overflow: hidden;
-
   box-shadow: 0 10px 24px rgba(0,0,0,.08);
   transition: transform .25s ease, box-shadow .25s ease;
 }
-
 .skill-card:hover{
   transform: translateY(-4px);
   box-shadow: 0 18px 40px rgba(0,0,0,.12);
@@ -274,6 +268,7 @@ section {
   outline-offset: 3px;
 }
 
+/* Typo titres/texte réutilisée partout */
 .skill-card h4{
   font-family: 'Tan-Nimbus';
   color: var(--red);
@@ -286,4 +281,71 @@ section {
   font-family: 'Azaret-Mono';
   font-size: clamp(.9rem, 1.6vw, 1.05rem);
 }
-*/
+
+/* ===== Version carte "simple" (non retournable) ===== */
+.skill-card:not(.flip-card){
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .4rem;
+}
+
+/* ===== Version carte retournable ===== */
+.skill-card.flip-card{            /* conteneur 3D */
+  position: relative;
+  perspective: 1000px;
+}
+.flip-inner{                      /* livret qui pivote */
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform .6s ease;
+}
+.flip-card.is-flipped .flip-inner{
+  transform: rotateY(180deg);
+}
+
+/* Faces */
+.face{
+  position: absolute; inset: 0;
+  padding: clamp(1rem, 2.2vw, 1.4rem);
+  border-radius: inherit;
+  backface-visibility: hidden;
+  background: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .4rem;
+}
+
+.face.front {
+  justify-content: space-between;
+}
+
+.face.back{
+  transform: rotateY(180deg);
+  justify-content: center;
+  gap: .8rem;
+}
+
+/* Dos : titre + boutons BUT */
+.face.back h5{
+  margin: 0 0 .2rem;
+  font-family: 'Tan-Nimbus';
+  color: var(--red);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+.but-actions{ display: flex; gap: .5rem; flex-wrap: wrap; }
+.but-btn{
+  display: inline-block;
+  padding: .55rem 1rem;
+  border-radius: 12px;
+  background: var(--beige);
+  color: var(--black);
+  text-decoration: none;
+  font-family: 'Azaret-Mono';
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.but-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.1); }
