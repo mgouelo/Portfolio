@@ -194,7 +194,7 @@ section {
 .project-top {
   display: flex;
   align-items: center;
-  gap: 0.6rem;          /* espace entre icône et titre */
+  gap: 0.6rem;
 }
 
 .project-top h4 {
@@ -212,6 +212,18 @@ section {
   gap: 1rem;
 }
 
+.project-body.youfile {
+  flex-direction: column;
+}
+
+.project-body.youfile img {
+  width: 75%;
+  max-width: 500px;
+  height: auto;
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+
 .project-body img {
   width: 25%;
   height: auto;
@@ -221,7 +233,7 @@ section {
   font-family: 'Azaret-Mono';
   font-size: clamp(.9rem, 1.6vw, 1.05rem);
   margin: 0;
-  flex-grow: 1;         /* ✅ prend l’espace libre au milieu */
+  flex-grow: 1;
   text-align: left;
 }
 
@@ -236,7 +248,7 @@ section {
 
 /* ---------------------------- Skills portfolio ----------------------------*/
 
-/* ===== Grid des cartes ===== */
+
 .skills-grid{
   width: 100%;
   margin-top: clamp(0.8rem, 2vw, 1.5rem);
@@ -246,9 +258,9 @@ section {
   justify-content: center;
 }
 
-/* ===== Style commun à toutes les cartes ===== */
+
 .skill-card{
-  display: block; /* base neutre ; le layout sera géré par :not(.flip-card) ou .face */
+  display: block;
   padding: clamp(1rem, 2.2vw, 1.4rem);
   border-radius: 18px;
   background: var(--white);
@@ -268,7 +280,7 @@ section {
   outline-offset: 3px;
 }
 
-/* Typo titres/texte réutilisée partout */
+
 .skill-card h4{
   font-family: 'Tan-Nimbus';
   color: var(--red);
@@ -282,7 +294,7 @@ section {
   font-size: clamp(.9rem, 1.6vw, 1.05rem);
 }
 
-/* ===== Version carte "simple" (non retournable) ===== */
+
 .skill-card:not(.flip-card){
   display: flex;
   flex-direction: column;
@@ -290,12 +302,12 @@ section {
   gap: .4rem;
 }
 
-/* ===== Version carte retournable ===== */
-.skill-card.flip-card{            /* conteneur 3D */
+
+.skill-card.flip-card{
   position: relative;
   perspective: 1000px;
 }
-.flip-inner{                      /* livret qui pivote */
+.flip-inner{
   position: absolute; inset: 0;
   border-radius: inherit;
   transform-style: preserve-3d;
