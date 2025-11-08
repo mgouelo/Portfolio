@@ -6,10 +6,12 @@
   --text: #f3f4f6;
   --muted: #b4b7c1;
   --primary: #4ade80;     /* vert bouton */
-  --accent: #60a5fa;      /* bleu détails */
   --icon-color: #f3f4f6;
   --separator-border: rgb(255, 255, 255);
   --nav-bottom: rgba(255,255,255,0.06);
+  --card-bg: #fff;
+  --card-bd: #1a1a1a20;
+  --card-text: #0b0b0c;
   --radius: 16px;
   --radius-lg: 24px;
   --container: 1120px;
@@ -24,7 +26,7 @@
   --separator-border: rgb(0, 0, 0);
   --surface: #ffffff;
   --surface-2: #fafafa;
-  --text: #333;
+  --text: #000000;
   --nav-bottom: rgba(0,0,0,0.08);
 }
 
@@ -35,6 +37,7 @@
 
 html, body {
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -138,9 +141,14 @@ a {
 }
 .hero-text h1 {
   font-size: clamp(2.2rem, 4vw, 3.2rem);
-  line-height: 1.1; margin: 0 0 1rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
 }
-.hero-text p { color: var(--muted); max-width: 46ch; margin-bottom: 1.25rem; }
+.hero-text p {
+  color: var(--text);
+  max-width: 46ch;
+  margin-bottom: 1.25rem;
+}
 
 .hero-portrait {
   justify-self: end;
@@ -178,7 +186,7 @@ a {
   padding: .35rem .6rem;
   border-radius: 999px;
   background: rgb(255, 255, 255);
-  color: var(--text);
+  color: #ffffff;
 }
 
 .badge.darkblue {
@@ -205,12 +213,12 @@ a {
 }
 
 .separator {
-  width: 40%;                  /* longueur de la ligne */
-  height: 2px;                 /* épaisseur */
-  margin: 4rem auto;           /* centrée avec espace vertical */
-  border: none;                /* supprime le style par défaut */
+  width: 40%;
+  height: 2px;
+  margin: 4rem auto;
+  border: none;
   background-color: var(--separator-border);
-  border-radius: 2px;          /* coins légèrement arrondis */
+  border-radius: 2px;
   opacity: 0.6;
 }
 
@@ -224,7 +232,7 @@ a {
 
 .project-card {
   background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
   border-radius: var(--radius-lg);
   overflow: visible;
   display: grid;
@@ -232,11 +240,19 @@ a {
   position: relative;
 }
 
-.project-accent {
-  height: 100px;
-  background: linear-gradient(135deg, var(--accent, #4f7df5) 60%, transparent 100%);
+.project-accent-blue {
+  height: 80px;
   border-top-left-radius: var(--radius-lg);
   border-top-right-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #60a5fa, #4f7df5 60%, transparent 100%);
+  clip-path: ellipse(150% 100% at 50% 0);
+}
+
+.project-accent-red {
+  height: 80px;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #fa6060, #f54f4f 60%, transparent 100%);
   clip-path: ellipse(150% 100% at 50% 0);
 }
 
@@ -257,10 +273,10 @@ a {
   gap: 2rem;
 }
 
-.project-desc {
+.project-desc-youfile {
   flex: 0 0 50%;
   margin-left: auto;
-  color: var(--muted);
+  color: var(--text);
   position: relative;
   z-index: 2;
   line-height: 1.5;
@@ -268,14 +284,37 @@ a {
   transform: translateY(-25%);
 }
 
-.project-mockup {
+.project-mockup-youfile {
   position: absolute;
-  left: -30%;
-  width: 500px;
+  left: -25%;
+  bottom: -30%;
+  width: 450px;
   max-width: none;
   transform: rotate(-6deg);
   z-index: 1;
   pointer-events: none;
+}
+
+.project-desc-ambu {
+  flex: 0 0 55%;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  z-index: 2;
+  position: relative;
+  margin: 0;
+  text-align: justify;
+}
+
+.project-mockup-ambu {
+  position: absolute;
+  right: -11rem;               /* dépasse légèrement sur la droite */
+  bottom: -15%;                /* descend un peu pour équilibrer visuellement */
+  width: 350px;
+  max-width: none;
+  z-index: 1;
+  pointer-events: none;
+  padding-bottom: 10px;
 }
 
 @media (max-width: 900px) {
@@ -308,33 +347,80 @@ a {
 
 
 /* ======= Skills ======= */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 1rem;
+.skills-carousel .marquee{
+  overflow: hidden;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
-.skill-card {
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,.08);
+
+/* Bande défilante */
+.skills-carousel .marquee-track{
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  align-items: stretch;
+  animation: skills-scroll 28s linear infinite;
+}
+
+/* Pause uniquement si une .skill-card est hover */
+.skills-carousel .marquee:has(.skill-card:hover) .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Accessibilité clavier : pause quand une carte a le focus à l’intérieur */
+.skills-carousel .marquee:has(.skill-card:focus-within) .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Une carte */
+.skill-card{
+  width: 320px;
+  flex: 0 0 auto;
+  background: var(--card-bg);
+  color: var(--card-text);
+  border: 1px solid var(--card-bd);
   border-radius: var(--radius);
-  padding: 1rem;
-  text-align: center;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  will-change: transform;
+  padding: 18px 18px 20px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  place-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  transition: transform .18s ease, box-shadow .18s ease;
 }
-
-.skill-card:hover {
+.skill-card:hover{
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0,0,0,.20);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
 }
 
-.skill-dot {
-  width: 12px; height: 12px; border-radius: 999px;
-  margin: 0 auto .6rem; background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(96,165,250,.12);
+/* Icône */
+.skill-icon{
+  width: 48px; height: 48px;
+  border-radius: 999px;
+  background: var(--accent, #4f6cf7);
+  display: grid; place-items: center;
+  margin-bottom: 10px;
 }
-.skill-title { margin: 0; font-size: 1rem; letter-spacing: .06em; }
-.skill-sub { margin: .25rem 0 0; color: var(--muted); font-size: .85rem; }
+.skill-icon svg{ width:22px; height:22px; fill:#fff; }
+
+/* Titre + sous-texte */
+.skill-title{
+  margin: 2px 0 8px;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  letter-spacing: .02em;
+  text-align: center;
+}
+.skill-sub{
+  margin-top: auto;
+  font-weight: 500;
+  opacity: .8;
+}
+
+/* Animation infinie (2 bandes -> on translate de 50%) */
+@keyframes skills-scroll{
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 22px/2)); }
+}
 
 /* ======= Tools ======= */
 .tools-row {
