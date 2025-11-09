@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio – Mathieu Gouëlo</title>
+  <title>Portfolio – Mathieu Gouélo</title>
   <meta name="description" content="Portfolio – Développeur informatique, web et apps." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Remplace par la/les polices de ton choix -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -17,7 +16,6 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#" aria-label="Accueil">
-        <!-- Remplace par ton logo -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 813.76 553.19" fill="currentColor" aria-hidden="true">
           <path d="M813.68,436.45c-.22-6.47-2.1-43.41-31.46-68.99-20.95-18.26-46.01-21.93-52.85-22.93-1.25-.18-5.5-.72-11.89-.72-22.64,0-66.72,6.33-107.51,48.58-10.95,11.02-44.3,39.61-66.83,39.61-6.05,0-12.94-1.79-18.09-14.86-.43-1.24-9.69-30.21,39.87-71.57,4.96.46,12.88,1,22.75,1,40.94,0,139.35-10.26,168.78-105.35l.2-.74c.9-3.67,19.93-84.27-22.92-143.53,21.41-12.24,45.76-38.52,44.46-84.56l-.35-12.39-68.67.02,1.2,13.85c1.1,12.67-.26,36.44-8.6,46.3-1.26,1.5-2.61,2.57-4.13,3.29-11.04-8.31-22.98-15.04-35.57-20.07-18.22-7.28-37.78-10.97-58.13-10.97-22.65,0-46.34,4.62-68.52,13.35l-.43.18c-11.15,4.87-33.18,16.4-53.37,37.85l.4-34.97h-167.17l-74.94,483.46L164.27,48.83H0v504.36h85.01l5.05-422.21,65.56,422.21h170.76l64.12-412.13v412.13h85.75l.63-54.91c11.13,8.85,26.27,15.48,46.15,15.48,12.97,0,27.21-2.8,42.34-8.31l.44-.16.43-.19c1.99-.9,49.21-22.39,87.09-56.48l.38-.36c4.35-4.25,19.74-16.37,32.99-16.37,5.92,0,10.77,2.45,15.23,7.69,1.91,2.79,15.91,25.29-10.18,52.63l-54.14,60.98c41.46,0,82.93,0,124.39,0,6.73-6.63,15.77-16.57,24.45-29.99,10.93-16.88,28.61-46.88,27.22-86.74ZM478.55,351.86l.64-55.82c8.16,9.24,18.43,18.72,31.08,26.58-10.67,7.8-21.8,17.66-31.72,29.24ZM574.25,79.64c43.65-11.28,91.58,28.08,107.05,87.93,15.47,59.84-7.38,117.51-51.03,128.79-43.65,11.28-91.58-28.08-107.05-87.93-15.47-59.84,7.38-117.51,51.03-128.79Z"/>
         </svg>
@@ -32,10 +30,9 @@
         </ul>
       </nav>
 
-      <!-- Bouton thème (placeholder, à brancher en JS si besoin) -->
       <button class="mode-toggle" type="button" aria-label="Basculer le thème">Sombre</button>
 
-      <!-- Menu mobile -->
+      <!-- menu mobile -->
       <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu">
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
@@ -67,7 +64,6 @@
         </div>
 
         <figure class="hero-portrait">
-          <!-- Remplace la source par ta photo -->
           <img src="assets/portrait.jpg" alt="Portrait de Matthieu Gouélo" />
         </figure>
       </div>
@@ -143,7 +139,7 @@
             </div>
             <h3 class="skill-title">RÉALISER</h3>
             <ul class="badges">
-              <li><a href="but1.html" class="badge darkblue">BUT1</a></li>
+              <li><a href="./skills/Realiser/BUT1/Réaliser1.html" class="badge darkblue" data-modal-src="./skills/Realiser/BUT1/Réaliser1.html">BUT1</a></li>
               <li><a href="but2.html" class="badge blue">BUT2</a></li>
               <li><a href="but3.html" class="badge skyblue">BUT3</a></li>
             </ul>
@@ -286,7 +282,6 @@
         <h2 id="tools-title" class="section-title">LANGUES & OUTILS</h2>
 
         <ul class="tools-row">
-          <!-- Remplace par les logos (img/svg) de git, python, flask, mysql, java, php, html, css, js, etc. -->
           <li class="tool"><img src="assets/tool-git.svg" alt="Git"></li>
           <li class="tool"><img src="assets/tool-python.svg" alt="Python"></li>
           <li class="tool"><img src="assets/tool-flask.svg" alt="Flask"></li>
@@ -365,24 +360,16 @@
     const toggleBtn = document.querySelector('.mode-toggle');
     const root = document.documentElement;
 
-    // Charger le thème sauvegardé (si présent)
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
       root.classList.add('light');
       toggleBtn.textContent = 'Clair';
     }
 
-    // Gestion du clic
     toggleBtn.addEventListener('click', () => {
       const isLight = root.classList.toggle('light');
-
-      // Transition douce
-      root.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-
-      // Changement du texte du bouton
+      root.style.transition = 'background-color 0.3s ease, color 0.3s ease'; // transition
       toggleBtn.textContent = isLight ? 'Clair' : 'Sombre';
-
-      // Sauvegarde du thème
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
 
@@ -396,7 +383,7 @@
 
       function openModal({title, src}) {
         titleEl.textContent = title || 'Détail';
-        iframe.src = src;                          // charge la page Notion exportée
+        iframe.src = src;
         modal.classList.add('is-open');
         document.body.classList.add('modal-open');
         setTimeout(() => (dialog.querySelector(focusableSel)||dialog).focus(), 0);
@@ -404,33 +391,49 @@
       function closeModal(){
         modal.classList.remove('is-open');
         document.body.classList.remove('modal-open');
-        iframe.src = 'about:blank';               // libère la page
-        if (lastTrigger) lastTrigger.focus();
+        iframe.src = 'about:blank';
+        if (lastTrigger) {
+          lastTrigger.focus();
+        }
       }
 
       document.addEventListener('click', (e) => {
         const a = e.target.closest('[data-modal-src]');
-        if (!a) return;
+        if (!a) {
+          return;
+        }
         e.preventDefault();
         lastTrigger = a;
         openModal({ title: a.textContent.trim(), src: a.getAttribute('data-modal-src') });
       });
 
       modal.addEventListener('click', (e) => {
-        if (e.target.matches('[data-modal-close], .modal__overlay')) closeModal();
+        if (e.target.matches('[data-modal-close], .modal__overlay')) {
+          closeModal();
+        }
       });
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
       });
 
-      // Focus trap
       modal.addEventListener('keydown', (e) => {
-        if (e.key !== 'Tab') return;
+        if (e.key !== 'Tab') {
+          return;
+        } 
         const nodes = dialog.querySelectorAll(focusableSel);
-        if (!nodes.length) return;
+        if (!nodes.length) {
+          return;
+        }
         const first = nodes[0], last = nodes[nodes.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        }
+        else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       });
     })();
 
