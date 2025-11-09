@@ -213,7 +213,7 @@
             </div>
             <h3 class="skill-title">RÉALISER</h3>
             <ul class="badges">
-              <li><a href="but1.html" class="badge darkblue">BUT1</a></li>
+              <li><a href="./skills/Realiser/BUT1/Réaliser1.html" class="badge darkblue" data-modal-src="./skills/Realiser/BUT1/Réaliser1.html">BUT1</a></li>
               <li><a href="but2.html" class="badge blue">BUT2</a></li>
               <li><a href="but3.html" class="badge skyblue">BUT3</a></li>
             </ul>
@@ -340,6 +340,27 @@
     </div>
   </footer>
 
+
+
+  <!-- ===== Modal compétences ===== -->
+  <div class="modal" id="skill-modal" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" type="button" aria-label="Fermer" data-modal-close>×</button>
+      <h3 id="modal-title" class="modal__title">Détail</h3>
+
+      <div class="modal__framewrap">
+        <iframe class="modal__iframe" title="Détail compétence" loading="lazy"></iframe>
+      </div>
+
+      <div class="modal__actions">
+        <button class="btn btn-primary" data-modal-close>Fermer</button>
+      </div>
+    </div>
+  </div>
+
+
+
   <script>
     const toggleBtn = document.querySelector('.mode-toggle');
     const root = document.documentElement;
@@ -364,6 +385,55 @@
       // Sauvegarde du thème
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
+
+    (() => {
+      const modal = document.getElementById('skill-modal');
+      const dialog = modal.querySelector('.modal__dialog');
+      const titleEl = modal.querySelector('#modal-title');
+      const iframe = modal.querySelector('.modal__iframe');
+      const focusableSel = 'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
+      let lastTrigger = null;
+
+      function openModal({title, src}) {
+        titleEl.textContent = title || 'Détail';
+        iframe.src = src;                          // charge la page Notion exportée
+        modal.classList.add('is-open');
+        document.body.classList.add('modal-open');
+        setTimeout(() => (dialog.querySelector(focusableSel)||dialog).focus(), 0);
+      }
+      function closeModal(){
+        modal.classList.remove('is-open');
+        document.body.classList.remove('modal-open');
+        iframe.src = 'about:blank';               // libère la page
+        if (lastTrigger) lastTrigger.focus();
+      }
+
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('[data-modal-src]');
+        if (!a) return;
+        e.preventDefault();
+        lastTrigger = a;
+        openModal({ title: a.textContent.trim(), src: a.getAttribute('data-modal-src') });
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target.matches('[data-modal-close], .modal__overlay')) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+
+      // Focus trap
+      modal.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab') return;
+        const nodes = dialog.querySelectorAll(focusableSel);
+        if (!nodes.length) return;
+        const first = nodes[0], last = nodes[nodes.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
   </script>
 
 </body>

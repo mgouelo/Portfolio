@@ -308,8 +308,8 @@ a {
 
 .project-mockup-ambu {
   position: absolute;
-  right: -11rem;               /* dépasse légèrement sur la droite */
-  bottom: -15%;                /* descend un peu pour équilibrer visuellement */
+  right: -11rem;
+  bottom: -15%;
   width: 350px;
   max-width: none;
   z-index: 1;
@@ -354,7 +354,6 @@ a {
   margin-bottom: 50px;
 }
 
-/* Bande défilante */
 .skills-carousel .marquee-track{
   display: flex;
   gap: 22px;
@@ -363,17 +362,15 @@ a {
   animation: skills-scroll 28s linear infinite;
 }
 
-/* Pause uniquement si une .skill-card est hover */
 .skills-carousel .marquee:has(.skill-card:hover) .marquee-track {
   animation-play-state: paused;
 }
 
-/* Accessibilité clavier : pause quand une carte a le focus à l’intérieur */
 .skills-carousel .marquee:has(.skill-card:focus-within) .marquee-track {
   animation-play-state: paused;
 }
 
-/* Une carte */
+
 .skill-card{
   width: 320px;
   flex: 0 0 auto;
@@ -393,7 +390,6 @@ a {
   box-shadow: 0 10px 24px rgba(0,0,0,.12);
 }
 
-/* Icône */
 .skill-icon{
   width: 48px; height: 48px;
   border-radius: 999px;
@@ -403,7 +399,6 @@ a {
 }
 .skill-icon svg{ width:22px; height:22px; fill:#fff; }
 
-/* Titre + sous-texte */
 .skill-title{
   margin: 2px 0 8px;
   font-size: clamp(1.1rem, 2.2vw, 1.6rem);
@@ -416,18 +411,114 @@ a {
   opacity: .8;
 }
 
-/* Animation infinie (2 bandes -> on translate de 50%) */
 @keyframes skills-scroll{
   from { transform: translateX(0); }
   to   { transform: translateX(calc(-50% - 22px/2)); }
 }
 
+
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index:1000;
+}
+
+.modal.is-open{
+  display:block;
+}
+
+.modal__overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  opacity:0;
+  transition:opacity .25s;
+}
+
+.modal__dialog{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-44%);
+  width:min(1000px, 92vw);
+  max-height:90vh;
+  background:var(--surface);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius-lg);
+  box-shadow:0 24px 64px rgba(0,0,0,.35);
+  opacity:0;
+  transition:opacity .25s,transform .25s;
+  padding:2rem 1.25rem 1rem;
+  overflow:hidden;
+}
+.modal.is-open .modal__overlay{
+  opacity:1;
+}
+
+.modal.is-open .modal__dialog {
+  opacity:1;
+  transform:translate(-50%,-50%);
+}
+
+.modal__title{
+  margin:0 0 .75rem;
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+.modal__framewrap{
+  height:min(70vh, 760px);
+  border-radius:calc(var(--radius-lg) - 6px);
+  overflow:hidden;
+  background:#fff;
+}
+
+.modal__iframe{
+  display:block; width:100%; height:100%; border:0; background:#fff;
+}
+
+.modal__close{
+  position:absolute;
+  right:.5rem;
+  top:.5rem;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.16);
+  cursor:pointer;
+}
+
+.modal__actions {
+  display: flex;
+  margin-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+body.modal-open{
+  overflow:hidden;
+}
+
+
+
 /* ======= Tools ======= */
 .tools-row {
-  display: flex; gap: 1.25rem; flex-wrap: wrap;
-  list-style: none; padding: 0; margin: 0; justify-content: center;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
 }
-.tool img {  height: 100px; object-fit: contain; filter: brightness(1.05) contrast(1.05); }
+.tool img {
+  height: 100px;
+  object-fit: contain;
+  filter: brightness(1.05) contrast(1.05);
+}
 
 /* ======= Contact ======= */
 .contact-grid {
@@ -443,8 +534,15 @@ a {
   border: 1px solid rgba(255,255,255,.08);
   color: var(--muted);
 }
-.contact-item:hover { color: var(--text); border-color: rgba(255,255,255,.18); }
-.contact-item img { width: 20px; height: 20px; }
+.contact-item:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,.18);
+}
+
+.contact-item img {
+  width: 20px;
+  height: 20px;
+}
 
 .contact-item svg {
   width: 20px;
