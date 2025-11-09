@@ -1,0 +1,708 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Administrer</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1bc010a1-12dd-818e-a6ed-d468c9abfe90" class="page serif"><header><div class="page-header-icon undefined"><span class="icon">🛠</span></div><h1 class="page-title">Administrer</h1><p class="page-description"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><h1 id="213010a1-12dd-8079-8aac-f30d9b837f3a" class="">🚀 SAE S2.03</h1><h3 id="213010a1-12dd-8026-86a9-ef2272bad28b" class="">Titre SAE :   SAE S2.03 - Installation d’un poste pour le réseau</h3><h3 id="213010a1-12dd-8097-9337-c4789d4b3157" class=""><strong>▶︎ </strong>Les apprentissages critiques </h3><ol type="1" id="213010a1-12dd-8021-872c-dd2903f68e90" class="numbered-list" start="1"><li>AC13.01 | Identifier les différends composants (matériels et logiciels) d’un système numérique</li></ol><ol type="1" id="218010a1-12dd-8071-ae2c-f787c5ebddec" class="numbered-list" start="2"><li>AC13.02 | Utiliser les fonctionnalités de base d’un système multitâches / multiutilisateurs</li></ol><ol type="1" id="218010a1-12dd-8017-ac3e-e763338ac1eb" class="numbered-list" start="3"><li>AC13.03 | Installer et configurer un système d’exploitation et des outils de développement</li></ol><ol type="1" id="218010a1-12dd-80e3-b764-d682d3157f9b" class="numbered-list" start="4"><li>AC13.04 | Configurer un poste de travail dans un réseau d’entreprise</li></ol><h3 id="213010a1-12dd-80e8-8c3d-cc35ba434938" class=""><strong>▶︎ Acquisition par Apprentissage Critique</strong></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-80b1-aae6-fa9db54a0f9b"><div style="font-size:1.5em"><span class="icon">📋</span></div><div style="width:100%">Démarche &amp; méthode</div></figure><p id="213010a1-12dd-80bf-8a39-e3e8eeddccf4" class="">L&#x27;objectif de ce projet est de savoir configuré un poste de travail pour le développement notamment via  :</p><ul id="2a6010a1-12dd-8071-be09-c6a8cfe64119" class="bulleted-list"><li style="list-style-type:disc">L&#x27;installation d&#x27;Ubuntu en WSL sous Windows 11 et en dual boot.</li></ul><ul id="2a6010a1-12dd-80bf-a5ee-eb8b7b0d60a1" class="bulleted-list"><li style="list-style-type:disc">La création d&#x27;une machine virtuelle (Debian) avec VirtualBox.</li></ul><ul id="2a6010a1-12dd-80fa-b0d4-d93a4b4b00ad" class="bulleted-list"><li style="list-style-type:disc">L&#x27;exploration des fonctionnalités de base de Linux (commandes, gestion des paquets, interfaces graphiques).</li></ul><ul id="2a6010a1-12dd-807d-a1be-e2316998c4a0" class="bulleted-list"><li style="list-style-type:disc">La mise en place des outils requis par l&#x27;IUT (dépendances logicielles, Java, IDE).</li></ul><p id="2a6010a1-12dd-8081-a4ba-c2d93dfe9c37" class="">Ces tâches visaient à développer des compétences en administration système et à comprendre les besoins techniques d&#x27;un poste de développement.</p><p id="2a6010a1-12dd-8004-8a2c-dc288fb0561d" class="">Nous avons d&#x27;abord réalisé l&#x27;installation d&#x27;Ubuntu en dual boot (partie 1), puis travaillé sur WSL et sur l’installation de Debian dans une VM (partie 2).</p><p id="2a6010a1-12dd-8050-b679-fe46235b5cfc" class=""><strong>Problèmes rencontrés :</strong></p><ul id="2a6010a1-12dd-803a-9ff9-c0a22f0b0376" class="bulleted-list"><li style="list-style-type:disc"><strong>Dual Boot</strong> : BitLocker était activé par défaut, empêchant la modification des partitions. Nous avons dû le désactiver pour pouvoir installer Ubuntu sans erreurs.</li></ul><ul id="2a6010a1-12dd-80b9-b6e1-c82b5d5d02d5" class="bulleted-list"><li style="list-style-type:disc"><strong>VM Debian</strong> : Un problème de redémarrage survenu après l’installation nous a contraint à réinstaller Debian pour la démonstration finale sur ma machine.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-800f-88ec-ca98d69a5a77"><div style="font-size:1.5em"><span class="icon">📖</span></div><div style="width:100%">Ressource utilisée</div></figure><ul id="213010a1-12dd-80df-b84a-f7146834d2c7" class="bulleted-list"><li style="list-style-type:disc"><strong>Documentation</strong> : Tutoriels officiels (Ubuntu-fr, VirtualBox), annexes fournies dans les PDF de la consigne.</li></ul><ul id="2a6010a1-12dd-8013-a09d-c5793c81605a" class="bulleted-list"><li style="list-style-type:disc"><strong>Outils</strong> : Rufus pour les clés USB bootable, VirtualBox pour la VM, commandes Linux (<code><strong>apt</strong></code>, <code><strong>sudo</strong></code>) pour les dépendances.</li></ul><ul id="2a6010a1-12dd-8065-b30e-c532f3be7261" class="bulleted-list"><li style="list-style-type:disc"><strong>Collaboration</strong> : Travail en binôme pour s’entraider, tests mutuels des configurations, partage d’expériences via Notion/Word</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-808f-9549-cf291eca2369"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%">Ce que j’ai appris</div></figure><p id="213010a1-12dd-8093-9aea-d654099068a7" class="">Au cours de cette SAE, j’ai exploré en profondeur le fonctionnement d’un système numérique, aussi bien sur le plan matériel que logiciel. L’installation de Linux en dual boot m’a permis de comprendre le rôle du BIOS/UEFI, le partitionnement du disque et l’interaction entre Windows et Linux. </p><p id="2a6010a1-12dd-807b-845b-c3bb7653e0a3" class="">L’utilisation de machines virtuelles m’a donné l’occasion de manipuler des composants virtuels comme le processeur, la mémoire ou les interfaces réseau, et d’en observer l’impact sur les performances. J’ai ensuite utilisé les fonctionnalités d’un système multitâches et multiutilisateurs en gérant des comptes, des droits et des processus sous Debian et Ubuntu. L’installation et la configuration de plusieurs distributions Linux, ainsi que d’outils de développement tels que le langage Java et l’IDE Geany, m’ont permis d’acquérir une bonne maîtrise des environnements APT et des installations manuelles. </p><p id="2a6010a1-12dd-80ae-a96a-c1fec6a964c5" class="">Enfin, la configuration réseau, notamment via Eduroam et VirtualBox, m’a aidé à comprendre les paramètres de communication entre machines et la logique d’un poste de travail intégré dans un réseau d’entreprise.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-8021-816b-ef21446b2c74"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><p id="213010a1-12dd-802b-8ecf-df653005b032" class="">Ce qui nous a manqué</p></div></figure><p id="213010a1-12dd-801e-8ec3-fd3fe8adb301" class="">→ Un <strong>guide plus détaillé</strong> sur la gestion des erreurs liées au <strong>BIOS/UEFI</strong> aurait été utile, surtout pour la partie dual boot où une mauvaise configuration peut avoir des conséquences importantes.</p><p id="2a6010a1-12dd-8070-bd39-e32240ac66ab" class=""><strong>Amélioration à envisager :</strong></p><p id="2a6010a1-12dd-80fb-8815-d4a99db32892" class="">Tester d’autres distributions Linux comme <strong>Kali Linux</strong>, qui est orientée sécurité, pour diversifier les apprentissages.</p><h3 id="213010a1-12dd-80ec-b6f6-f40dd7228092" class="">▶︎ Les traces</h3><p id="213010a1-12dd-800a-9a97-d587ccfd28f2" class=""><strong>Mes traces significatives</strong> associées à cette action en lien avec le niveau de développement d&#x27;une ou plusieurs compétences (fichiers, copies d&#x27;écran, document spécifique …)</p><p id="213010a1-12dd-8037-9926-fd0e690b26ac" class="">Mon auto-évaluation de la compétence : implémentation d&#x27;un besoin client</p><figure id="213010a1-12dd-80a4-aa29-f6366e3c5619" class="image"><a href="Capture_dcran_2024-05-31__15.31.42.png"><img style="width:2734px" src="Capture_dcran_2024-05-31__15.31.42.png"/></a></figure><p id="213010a1-12dd-80a6-a927-f367b8e9eefc" class="">La note que je m&#x27;attribue : </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-8080-ad91-ea4d7a7cc1c1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">14</div></figure><h3 id="213010a1-12dd-80b3-bd0d-fbd19f001545" class="">▶︎ Les travaux réalisés</h3><p id="213010a1-12dd-801c-817e-c1ff85a20ffb" class="">Liens, fichiers, démo …</p><h2 id="213010a1-12dd-8048-9bd2-d54b66d7d6ef" class="">Déminstration du jeu <em>facile </em>:</h2><figure id="213010a1-12dd-80a8-aa1e-cd08ee3d81d8"><div class="source"><a href="facile.mp4">attachment:4c4df01d-7b80-458d-9491-9506fc11cb73:facile.mp4</a></div></figure><p id="213010a1-12dd-80cd-85db-e109cbc84bac" class="">
+</p><h2 id="213010a1-12dd-8098-a99c-d889ca0f9f57" class="">Démonstration du jeu <em>intermédiaire</em> :</h2><figure id="213010a1-12dd-8092-8cc0-dacd5c20eaac"><div class="source"><a href="intermdiaire.mp4">attachment:4d38b722-976f-4e8b-809e-2dad65241aea:intermdiaire.mp4</a></div></figure><p id="1bc010a1-12dd-81b0-a073-d9678d2587e2" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

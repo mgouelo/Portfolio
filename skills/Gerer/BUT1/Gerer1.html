@@ -1,0 +1,1129 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Gérer</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1bc010a1-12dd-814f-9f74-cfe7236fb195" class="page serif"><header><div class="page-header-icon undefined"><img class="icon" src="math-svgrepo-com.svg"/></div><h1 class="page-title">Gérer</h1><p class="page-description"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><h1 id="213010a1-12dd-8037-9ee4-c39b9543fed3" class="">🚀 SAE S2.04</h1><h3 id="213010a1-12dd-80ca-90f5-cf7572b3a611" class="">Titre SAE :   SAE S2.04 - Exploitation d’une base de données</h3><h3 id="213010a1-12dd-8079-a30d-fce52d36d2a0" class=""><strong>▶︎ </strong>Les apprentissages critiques </h3><p id="213010a1-12dd-8079-9dd6-d9a96a5fe9bf" class="">1.  AC14.01 | Mettre à jour et interroger une base de données relationnelles (en requête directes ou à travers une application)<br/>2. AC14.02 | Visualiser des données<br/>3. AC14.03 | Concevoir une base de données relationnelle à partir d’un cahier des charges</p><h3 id="213010a1-12dd-800b-a74a-c9f70908db97" class=""><strong>▶︎ Acquisition par apprentissage critique</strong></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-8076-b585-cd7f2350371f"><div style="font-size:1.5em"><span class="icon">📎</span></div><div style="width:100%"><strong>AC14.01 | Mettre à jour et interroger une base de données relationnelles (en requête directes ou à travers une application)</strong></div></figure><p id="218010a1-12dd-80c3-ab14-e94c81ec9ddf" class="">Au cours du projet, avec mon groupe, j’ai dû  interroger une base de données relationnelle en écrivant de multiple requêtes SQL, incluant des jointures internes et externes, des sous requêtes, des regroupements avec des fonctions d’agrégation, ainsi que des vues. Par exemple, j’ai utilisé des jointures pour afficher les compteurs situés dans un quartier donné (<code>JOIN Quartier ON leQuartier = id</code>) et pour combiner les données de plusieurs tables. J’ai aussi employé des sous requêtes avec <code>EXISTS</code>, <code>NOT EXISTS</code> ou <code>IN</code> pour filtrer des résultats, comme dans la requête visant à lister les compteurs n’ayant jamais enregistré d’anomalie forte. </p><p id="218010a1-12dd-80e4-9ff1-f1e8c4652fb7" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-801c-a20b-f488053383a3"><div style="font-size:1.5em"><span class="icon">📎</span></div><div style="width:100%"> <strong>AC14.02 | Visualiser des données</strong></div></figure><p id="213010a1-12dd-800d-bba8-f382a853f67b" class="">Même si la visualisation graphique n&#x27;était pas directement incluse dans les fichiers, j’ai créé plusieurs vues SQL (<code>CREATE VIEW</code>) permettant de structurer et préparer les données pour une possible visualisation. Par exemple, la vue <code>vue_StatistiquesQuartiers</code> fournit une synthèse du total de vélos et de la moyenne de vélo par quartier, ce qui pourrait être visualisé sous forme de graphiques à posteriori. De même, <code>vue_FrequentationJournaliere</code> agrège les comptages quotidiens en tenant compte des périodes de vacances, permettant de représenter l’évolution de la fréquentation cycliste dans le temps.<br/><br/></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-806f-964a-c86fa79647c2"><div style="font-size:1.5em"><span class="icon">📎</span></div><div style="width:100%"><strong>AC14.03 | Concevoir une base de données relationnelle à partir d’un cahier des charges</strong></div></figure><p id="213010a1-12dd-80b1-8582-c5d5fcb56ce1" class="">J’ai réalisé le schéma relationnel de la base à partir d’un cahier des charges implicite portant sur les comptages de vélos dans les quartiers d’une ville. Le script de création de la base (<code>création_de_la_base.sql</code>) démontre cette compétence : j’ai défini quatre tables (<code>Quartier</code>, <code>Compteur</code>, <code>Date</code>, <code>Comptage</code>) avec des clés primaires et étrangères, des contraintes d’intégrité (<code>CHECK</code>, <code>FOREIGN KEY</code>, <code>NOT NULL</code>) et des relations structurées. Le schéma prend en compte la cohérence des données (ex. : <code>CHECK(nbVelo &gt;= 0)</code>). Donc la base de données à été formalisée de façon à satisfaire les besoins exprimés dans le cahier des charges.</p><p id="218010a1-12dd-8041-9364-ddfc92a4af2e" class="">
+</p><h3 id="213010a1-12dd-8086-9e77-c5e750d5bda3" class="">▶︎ Les traces</h3><p id="213010a1-12dd-802c-964b-f32eab41dc46" class=""><strong>Mes traces significatives</strong> associées à cette action en lien avec le niveau de développement d&#x27;une ou plusieurs compétences (fichiers, copies d&#x27;écran, document spécifique …)</p><p id="213010a1-12dd-8086-8e42-e489e071694f" class="">Mon auto-évaluation de la compétence : implémentation d&#x27;un besoin client</p><figure id="213010a1-12dd-807c-bc85-e005923108e6" class="image"><a href="Capture_dcran_2024-05-31__15.31.42.png"><img style="width:2734px" src="Capture_dcran_2024-05-31__15.31.42.png"/></a></figure><p id="213010a1-12dd-8064-8d3d-ca1e5811e2e7" class="">La note que je m&#x27;attribue : </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="213010a1-12dd-80b7-9224-cb756401f05a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">16</div></figure><h2 id="213010a1-12dd-80f3-8220-dd86adf51e04" class=""><em>création de la base </em>:</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="218010a1-12dd-8012-89b4-d72b74a95a73" class="code code-wrap"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">/*
+Script de création de la base SQL - SAE S2.04
+Prénom : Nolann / Matthieu / Arthur / Marin
+Nom : LESCOP / GOUELO / JAN / WEIS
+Groupe : 1D1
+
+---------------------------------------------------
+/* SCHEMA RELATIONNEL
+
+Quartier(id (1), nomQuartier, longueurPiste)
+Compteur(numero (1), libelle, leQuartier = @Quartier.id)
+Date(date (1), jour (NN), tempMoy, vacances)
+Comptage([numCompteur = @Compteur.numero, laDate = @Date.date](1), nbVelo, probaAnomalie)
+
+*/
+---------------------------------------------------
+*/
+
+SET SQL_SAFE_UPDATES = 0;
+
+DROP TABLE IF EXISTS Comptage;
+DROP TABLE IF EXISTS Compteur;
+DROP TABLE IF EXISTS Date;
+DROP TABLE IF EXISTS Quartier;
+
+CREATE TABLE Quartier (
+    id INT,
+    nomQuartier VARCHAR(50),
+    longueurPiste FLOAT,
+    CONSTRAINT pk_Quartier PRIMARY KEY (id),
+    CONSTRAINT ck_longueurPiste CHECK (longueurPiste &gt;= 0)
+);
+
+CREATE TABLE Compteur (
+    numero INT,
+    libelle VARCHAR(50),
+    leQuartier INT,
+    CONSTRAINT pk_Compteur PRIMARY KEY (numero),
+    CONSTRAINT fk_Compteur_Quartier FOREIGN KEY (leQuartier) REFERENCES Quartier(id)
+);
+
+CREATE TABLE Date (
+    date DATE,
+    jour INT NOT NULL,
+    tempMoy FLOAT,
+    vacances VARCHAR(50),
+    CONSTRAINT pk_date PRIMARY KEY (date),
+    CONSTRAINT ck_jour CHECK (jour BETWEEN 1 AND 7)
+);
+
+CREATE TABLE Comptage (
+    numCompteur INT,
+    laDate DATE,
+    nbVelo INT,
+    probaAnomalie VARCHAR(10),
+    CONSTRAINT pk_Comptage PRIMARY KEY (numCompteur, laDate),
+    CONSTRAINT fk_Comptage_Compteur FOREIGN KEY (numCompteur) REFERENCES Compteur(numero),
+    CONSTRAINT fk_Comptage_Date FOREIGN KEY (laDate) REFERENCES Date(date),
+    CONSTRAINT ck_nbVelo CHECK (nbVelo &gt;= 0)
+);</code></pre><h2 id="213010a1-12dd-8042-b684-e3b8a57094e0" class="">Requêtes SQL :</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="218010a1-12dd-802d-90ec-e9c63cb38ad6" class="code code-wrap"><code class="language-SQL" style="white-space:pre-wrap;word-break:break-all">/*
+Requêtes SQL - SAE S2.04
+Prénom : Nolann / Matthieu / Arthur / Marin
+Nom : LESCOP / GOUELO / JAN / WEIS
+Groupe : 1D1
+*/
+
+
+-- Requête 1 : Quels sont les compteurs (numéro et libellé) situés dans le quartier &quot;Centre-ville&quot; ? (jointure interne)
+SELECT DISTINCT numero, libelle
+FROM Compteur
+    JOIN Quartier ON leQuartier = id
+WHERE nomQuartier = &#x27;Centre Ville&#x27;;
+/* Résultat de la requête : 22 tuples
+# numero, libelle
+&#x27;664&#x27;, &#x27;Bonduelle vers sud&#x27;
+&#x27;665&#x27;, &#x27;Bonduelle vers Nord&#x27;
+&#x27;666&#x27;, &#x27;Pont Audibert vers Sud&#x27;
+&#x27;674&#x27;, &#x27;Pont Haudaudine vers Sud&#x27;
+&#x27;675&#x27;, &#x27;Pont Haudaudine vers Nord&#x27;
+...
+*/
+
+
+-- Requête 2 : Quels sont les quartiers qui ont la même longueur de piste cyclable ? (auto-jointure)
+SELECT Q1.nomQuartier
+FROM Quartier Q1, Quartier Q2
+WHERE Q1.id != Q2.id
+AND Q1.longueurPiste = Q2.longueurPiste;
+/* Résultat de la requête : 0 tuple
+
+*/
+
+
+-- Requête 3 : Afficher tous les quartiers avec leurs compteurs, même ceux qui n&#x27;ont pas de compteurs. (jointure externe)
+SELECT numero, libelle, nomQuartier
+FROM Compteur
+    LEFT JOIN Quartier ON leQuartier = id;
+/* Résultat de la requête : 76 tuples
+ # numero, libelle, nomQuartier
+&#x27;89&#x27;, &#x27;Coteaux vers Ouest&#x27;, NULL
+&#x27;664&#x27;, &#x27;Bonduelle vers sud&#x27;, &#x27;Centre Ville&#x27;
+&#x27;665&#x27;, &#x27;Bonduelle vers Nord&#x27;, &#x27;Centre Ville&#x27;
+&#x27;666&#x27;, &#x27;Pont Audibert vers Sud&#x27;, &#x27;Centre Ville&#x27;
+&#x27;667&#x27;, &#x27;EntrÃ©e pont Audibert vers Nord&#x27;, &#x27;Ile de Nantes&#x27;
+...
+*/
+
+
+-- Requête 4 : Lister toutes les dates avec les comptages, y compris les dates où aucun comptage n&#x27;a été effectué. (jointure externe)
+SELECT date, laDate
+FROM Date
+    LEFT JOIN Comptage ON laDate = date;
+/* Résultat de la requête : 1000 tuples
+ # date, laDate
+&#x27;2020-01-01&#x27;, &#x27;2020-01-01&#x27;
+&#x27;2020-01-01&#x27;, &#x27;2020-01-01&#x27;
+&#x27;2020-01-01&#x27;, &#x27;2020-01-01&#x27;
+&#x27;2020-01-01&#x27;, &#x27;2020-01-01&#x27;
+&#x27;2020-01-01&#x27;, &#x27;2020-01-01&#x27;
+...
+*/
+
+
+-- Requête 5 : Quels compteurs n&#x27;ont jamais enregistré de comptage avec une anomalie FORTE ? (sous-requête avec NOT IN)
+SELECT DISTINCT numCompteur
+FROM Comptage
+WHERE numCompteur NOT IN (SELECT DISTINCT numCompteur
+                           FROM Comptage
+                           WHERE UPPER(probaAnomalie) = &#x27;FORTE&#x27;
+                          );
+/* Résultat de la requête : 2 tuples
+# numCompteur
+&#x27;725&#x27;
+&#x27;981&#x27;
+*/
+
+
+-- Requête 6 : Quels quartiers ont des compteurs qui ont enregistré plus de 100 vélos un jour de vacances ? (sous-requête avec IN)
+SELECT DISTINCT nomQuartier
+FROM Quartier
+    JOIN Compteur ON leQuartier = id
+WHERE numero IN ( SELECT DISTINCT numCompteur
+                  FROM Comptage
+                    JOIN Date ON laDate = date
+                  WHERE nbVelo &gt; 100
+                  AND UPPER(vacances) != &#x27;HORS VACANCES&#x27;
+                )
+;
+/* Résultat de la requête : 9 tuples
+# nomQuartier
+&#x27;Centre Ville&#x27;
+&#x27;Dervallières - Zola&#x27;
+&#x27;Hauts Pavés - Saint Félix&#x27;
+&#x27;Malakoff - Saint-Donatien&#x27;
+&#x27;Ile de Nantes&#x27;
+&#x27;Nantes Nord&#x27;
+&#x27;Nantes Sud&#x27;
+&#x27;Pont Rousseau&#x27;
+&#x27;Ragon&#x27;
+*/
+
+
+-- Requête 7 : Quelles dates ont au moins un comptage avec une probabilité d&#x27;anomalie FORTE ? (sous-requête avec EXISTS)
+SELECT DISTINCT date
+FROM Date
+WHERE EXISTS (
+    SELECT numCompteur
+    FROM Comptage
+    WHERE laDate = date
+        AND UPPER(probaAnomalie) = &#x27;FORTE&#x27;
+);
+/* Résultat de la requête : 728 tuples
+# date
+&#x27;2020-01-01&#x27;
+&#x27;2020-01-02&#x27;
+&#x27;2020-01-03&#x27;
+&#x27;2020-01-04&#x27;
+&#x27;2020-01-05&#x27;
+&#x27;2020-01-06&#x27;
+...
+*/
+
+
+-- Requête 8 : Quels quartiers n&#x27;ont aucun compteur ayant enregistré de données ? (sous-requête avec NOT EXISTS)
+SELECT nomQuartier
+FROM Quartier
+    JOIN Compteur ON leQuartier = id
+WHERE NOT EXISTS (
+    SELECT *
+    FROM Comptage
+    WHERE numCompteur = numero
+);
+/* Résultat de la requête : 2 tuples
+# nomQuartier
+&#x27;Doulon - Bottière&#x27;
+&#x27;Doulon - Bottière&#x27;
+*/
+
+
+-- Requête 9 : Quel est le nombre total de vélos comptés sur l&#x27;ensemble des comptages ? (Fonction de groupe sans regroupement)
+SELECT SUM(nbVelo) AS totalVelos
+FROM Comptage;
+/* Résultat de la requête : 1 tuple
+# totalVelos
+&#x27;39448940&#x27;
+*/
+
+
+-- Requête 10 : Quelle est la température moyenne la plus élevée enregistrée parmi toutes les dates ? (Fonction de groupe sans regroupement)
+SELECT MAX(tempMoy) AS tempMax
+FROM Date;
+/* Résultat de la requête : 1 tuple
+# tempMax
+&#x27;30.95&#x27;
+*/
+
+
+-- Requête 11 : Quel est le nombre moyen de vélos comptés par quartier ? (Regroupement avec fonction de groupe)
+SELECT nomQuartier, AVG(nbVelo) AS nbMoyenVelo
+FROM Quartier
+    JOIN Compteur ON leQuartier = id
+        JOIN Comptage ON numCompteur = numero
+GROUP BY nomQuartier;
+/* Résultat de la requête : 9 tuples
+# nomQuartier, nbMoyenVelo
+&#x27;Centre Ville&#x27;, &#x27;817.5560&#x27;
+&#x27;Dervallières - Zola&#x27;, &#x27;761.9452&#x27;
+&#x27;Hauts Pavés - Saint Félix&#x27;, &#x27;484.1551&#x27;
+&#x27;Malakoff - Saint-Donatien&#x27;, &#x27;260.4598&#x27;
+&#x27;Ile de Nantes&#x27;, &#x27;911.0991&#x27;
+&#x27;Nantes Nord&#x27;, &#x27;171.0307&#x27;
+&#x27;Nantes Sud&#x27;, &#x27;1129.9696&#x27;
+&#x27;Pont Rousseau&#x27;, &#x27;258.1362&#x27;
+&#x27;Ragon&#x27;, &#x27;49.3030&#x27;
+*/
+
+
+-- Requête 12 : Combien de comptages ont été effectués pour chaque jour de la semaine (triés dans l&#x27;ordre) ? (Regroupement avec fonction de groupe)
+SELECT jour, COUNT(numCompteur) AS nbComptage
+FROM Date
+    JOIN Comptage ON laDate = date
+GROUP BY jour
+ORDER BY jour;
+/* Résultat de la requête : 7 tuples
+# jour, nbComptage
+&#x27;1&#x27;, &#x27;9722&#x27;
+&#x27;2&#x27;, &#x27;9720&#x27;
+&#x27;3&#x27;, &#x27;9652&#x27;
+&#x27;4&#x27;, &#x27;9670&#x27;
+&#x27;5&#x27;, &#x27;9664&#x27;
+&#x27;6&#x27;, &#x27;9722&#x27;
+&#x27;7&#x27;, &#x27;9654&#x27;
+*/
+
+
+-- Question 13 : Quels quartiers ont une longueur totale de piste cyclable supérieure à 10 km et plus de 3 compteurs ?
+SELECT nomQuartier, SUM(longueurPiste) AS longueurPisteTotal
+FROM Quartier
+    JOIN Compteur ON leQuartier = id
+GROUP BY nomQuartier
+HAVING COUNT(leQuartier) &gt; 3 AND SUM(longueurPiste) &gt;= 10000;
+/* Résultat de la requête : 4 tuples
+# nomQuartier, longueurPisteTotal
+&#x27;Centre Ville&#x27;, &#x27;474071.3828125&#x27;
+&#x27;Hauts Pavés - Saint Félix&#x27;, &#x27;122091.6015625&#x27;
+&#x27;Malakoff - Saint-Donatien&#x27;, &#x27;252707.396484375&#x27;
+&#x27;Ile de Nantes&#x27;, &#x27;194389.1953125&#x27;
+*/
+
+
+-- Requête 14 : Quels compteurs (numéro) ont enregistré en moyenne plus de 50 vélos par jour pendant les vacances ? (Regroupement et restriction avec HAVING)
+SELECT numero, AVG(nbVelo) AS moyenneVelo
+FROM Compteur
+    JOIN Comptage ON numCompteur = numero
+        JOIN Date ON laDate = date
+WHERE UPPER(vacances) != &#x27;HORS VACANCES&#x27;
+GROUP BY numero
+HAVING AVG(nbVelo) &gt; 50;
+/* Résultat de la requête : 62 tuples
+# numero, moyenneVelo
+&#x27;664&#x27;, &#x27;716.3554&#x27;
+&#x27;665&#x27;, &#x27;624.0680&#x27;
+&#x27;666&#x27;, &#x27;165.7681&#x27;
+&#x27;667&#x27;, &#x27;1753.4244&#x27;
+&#x27;668&#x27;, &#x27;540.9248&#x27;
+...
+*/
+
+
+-- Requête 15 : Quels compteurs ont enregistré des données pour toutes les dates de vacances ? (Division normale)
+SELECT numero
+FROM Compteur
+WHERE NOT EXISTS (
+    SELECT date
+    FROM Date
+    WHERE UPPER(vacances) != &#x27;HORS VACANCES&#x27;
+    EXCEPT
+    SELECT laDate
+    FROM Comptage
+    WHERE numCompteur = numero
+);
+/* Résultat de la requête : 50 tuples
+ # numero
+&#x27;981&#x27;
+&#x27;667&#x27;
+&#x27;668&#x27;
+&#x27;669&#x27;
+&#x27;672&#x27;
+...
+*/
+
+
+-- Requête 16 : Quels compteurs ont enregistré des données uniquement les jours où la température moyenne était supérieure à 15°C ? (Division exacte)
+SELECT numero
+FROM Compteur
+WHERE NOT EXISTS (
+    SELECT laDate
+    FROM Comptage
+    WHERE numCompteur = numero
+    EXCEPT
+    SELECT date
+    FROM Date
+    WHERE tempMoy &gt; 15
+)
+  AND EXISTS (
+    SELECT laDate
+    FROM Comptage
+    WHERE numCompteur = numero
+);
+/* Résultat de la requête : 0 tuple
+*/
+
+
+-- Requête 17 : Créer une vue &quot;ComptagesAnormaux&quot; listant les comptages avec probaAnomalie = &#x27;FORTE&#x27;
+CREATE OR REPLACE VIEW vue_ComptageAnormaux AS
+SELECT *
+FROM Comptage
+WHERE probaAnomalie = &#x27;FORTE&#x27;;
+
+-- Consultation
+SELECT * FROM ComptagesAnormaux;
+/* Résultat de la requête : 1000 tuples
+# numCompteur, laDate, nbVelo, probaAnomalie
+&#x27;664&#x27;, &#x27;2020-03-08&#x27;, &#x27;0&#x27;, &#x27;Forte&#x27;
+&#x27;664&#x27;, &#x27;2020-05-20&#x27;, &#x27;0&#x27;, &#x27;Forte&#x27;
+&#x27;664&#x27;, &#x27;2020-05-21&#x27;, &#x27;0&#x27;, &#x27;Forte&#x27;
+&#x27;664&#x27;, &#x27;2020-05-22&#x27;, &#x27;0&#x27;, &#x27;Forte&#x27;
+&#x27;664&#x27;, &#x27;2020-05-23&#x27;, &#x27;0&#x27;, &#x27;Forte&#x27;
+&#x27;664&#x27;, &#x27;2020-05-24&#x27;, &#x27;0&#x27;, &#x27;Forte&#x27;
+...
+ */
+
+
+-- Requête 18 : Créer une vue &quot;QuartiersSansDonnees&quot; montrant les quartiers sans aucun comptage enregistré.
+CREATE OR REPLACE VIEW vue_QuartiersSansDonnes AS
+SELECT DISTINCT id, UPPER(nomQuartiers)
+FROM Quartier
+WHERE NOT EXISTS (
+    SELECT *
+    FROM Compteur
+        JOIN Comptage ON numero = numCompteur
+    WHERE leQuartier = id
+);
+
+-- Consultation
+SELECT * FROM vue_QuartiersSansDonnees;
+/* Résultat de la requête : 9 tuples
+# id, UPPER(nomQuartier)
+&#x27;2&#x27;, &#x27;BELLEVUE - CHANTENAY - SAINTE ANNE&#x27;
+&#x27;7&#x27;, &#x27;BREIL - BARBERIE&#x27;
+&#x27;9&#x27;, &#x27;NANTES ERDRE&#x27;
+&#x27;10&#x27;, &#x27;DOULON - BOTTIÈRE&#x27;
+&#x27;14301&#x27;, &#x27;TRENTEMOULT&#x27;
+&#x27;14302&#x27;, &#x27;HÔTEL DE VILLE&#x27;
+&#x27;14303&#x27;, &#x27;CHÂTEAU DE REZÉ&#x27;
+&#x27;14305&#x27;, &#x27;LA HOUSSAIS&#x27;
+&#x27;14306&#x27;, &#x27;BLORDIÈRE&#x27;
+*/
+
+
+-- Requête 19 : Créer une vue &quot;StatistiquesQuartiers&quot; qui montre pour chaque quartier le nombre total de vélos comptés et la moyenne par compteur
+CREATE OR REPLACE VIEW vue_StatistiquesQuartiers AS
+SELECT UPPER(nomQuartier), SUM(nbVelo) AS nbTotalVelo, AVG(nbVelo) AS moyenneCompteur
+FROM Quartier
+    JOIN Compteur ON leQuartier = id
+        JOIN Comptage ON numCompteur = numero
+GROUP BY leQuartier, nomQuartier;
+
+-- Consultation
+SELECT * FROM vue_StatistiquesQuartiers;
+/* Résultat de la requête : 9 tuples
+# UPPER(nomQuartier), nbTotalVelo, moyenneCompteur
+&#x27;CENTRE VILLE&#x27;, &#x27;20084080&#x27;, &#x27;817.5560&#x27;
+&#x27;DERVALLIÈRES - ZOLA&#x27;, &#x27;848045&#x27;, &#x27;761.9452&#x27;
+&#x27;HAUTS PAVÉS - SAINT FÉLIX&#x27;, &#x27;2163205&#x27;, &#x27;484.1551&#x27;
+&#x27;MALAKOFF - SAINT-DONATIEN&#x27;, &#x27;2618402&#x27;, &#x27;260.4598&#x27;
+&#x27;ILE DE NANTES&#x27;, &#x27;6106186&#x27;, &#x27;911.0991&#x27;
+&#x27;NANTES NORD&#x27;, &#x27;161453&#x27;, &#x27;171.0307&#x27;
+&#x27;NANTES SUD&#x27;, &#x27;2524352&#x27;, &#x27;1129.9696&#x27;
+&#x27;PONT ROUSSEAU&#x27;, &#x27;576160&#x27;, &#x27;258.1362&#x27;
+&#x27;RAGON&#x27;, &#x27;110143&#x27;, &#x27;49.3030&#x27;
+*/
+
+
+-- Requête 20 : Créer une vue &quot;FrequentationJournaliere&quot; qui calcule le nombre total de vélos comptés par date, avec indication si c&#x27;était un jour de vacances.
+CREATE OR REPLACE VIEW vue_FrequentationJournaliere AS
+SELECT date, vacances, SUM(nbVelo) AS nbVeloTotal
+FROM Date
+    LEFT JOIN Comptage ON laDate = date
+GROUP BY date, vacances;
+
+-- Consultation
+SELECT * FROM vue_FrequentationJournaliere;
+/* Résultat de la requête : 1000 tuples
+# date, vacances, nbVeloTotal
+&#x27;2020-01-01&#x27;, &#x27;Vacances de Noël\r&#x27;, &#x27;7777&#x27;
+&#x27;2020-01-02&#x27;, &#x27;Vacances de Noël\r&#x27;, &#x27;20921&#x27;
+&#x27;2020-01-03&#x27;, &#x27;Vacances de Noël\r&#x27;, &#x27;22655&#x27;
+&#x27;2020-01-04&#x27;, &#x27;Vacances de Noël\r&#x27;, &#x27;18760&#x27;
+&#x27;2020-01-05&#x27;, &#x27;Vacances de Noël\r&#x27;, &#x27;15444&#x27;
+...
+*/</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
