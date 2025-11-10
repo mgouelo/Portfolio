@@ -65,7 +65,9 @@ a {
 
 /* ======= Header ======= */
 .site-header {
-  position: sticky; top: 0; z-index: 50;
+  position: sticky !important;
+  top: 0;
+  z-index: 50;
   backdrop-filter: blur(8px);
   background: color-mix(in srgb, var(--bg) 85%, transparent);
   border-bottom: 1px solid var(--nav-bottom);
@@ -122,11 +124,58 @@ a {
   display: block; width: 22px; height: 2px; background: var(--text); margin: 4px 0;
 }
 
-/* ======= Mobile menu (à ouvrir en JS) ======= */
+/* ======= Mobile menu ======= */
 .mobile-nav { border-top: 1px solid rgba(255,255,255,.06); background: var(--bg); }
 .mobile-nav ul { list-style: none; margin: 0; padding: .75rem 1rem; display: grid; gap: .5rem; }
 .mobile-nav a { padding: .5rem; border-radius: 8px; color: var(--muted); display: block; }
 .mobile-nav a:hover { background: var(--surface-2); color: var(--text); }
+
+
+@media (max-width: 960px) {
+
+  .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+
+  .mode-toggle { justify-self: start; }
+  .brand { justify-self: center; margin: 0 auto; }
+  .nav-toggle { justify-self: end; z-index: 1001; }
+
+  .mobile-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    width: 180px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    text-align: right;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity .25s ease, transform .25s ease;
+    pointer-events: none; /* évite les clics quand fermé */
+  }
+
+  .mobile-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-nav[hidden] { display: none; }
+
+  .mobile-nav a { color: var(--text); text-decoration: none; font-weight: 600; }
+  .mobile-nav a:hover { color: var(--accent); }
+}
+
 
 /* ======= Hero ======= */
 .hero {
@@ -317,32 +366,65 @@ a {
   padding-bottom: 10px;
 }
 
-@media (max-width: 900px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-content {
+@media (max-width: 900px){
+  .project-content{
     flex-direction: column;
+    align-items: flex-start;
     min-height: auto;
   }
 
-  .project-desc {
-    flex: 1;
-    max-width: none;
+  /* YOUFILE */
+  .project-desc-youfile{
+    flex: 0 0 auto;
+    margin: 0;
+    transform: none;
+    text-align: left;
+  }
+  .project-mockup-youfile{
+    position: static;
+    width: 100%;
+    max-width: 520px;
+    transform: none;
+    margin-top: 0;
+  }
+
+
+  /* AMBULYMPICS */
+  .project-content {
+    flex-direction: column-reverse;
+  }
+
+  .project-card:nth-of-type(2) .project-content {
+    flex-direction: column;
+  }
+
+  .project-card:nth-of-type(2) .project-mockup-ambu {
+    position: static;
+    width: 100%;
+    max-width: 520px;
+    transform: translateX(10%);
+    margin-bottom: 1rem;
+  }
+
+  .project-card:nth-of-type(2) .project-desc-ambu {
     text-align: left;
   }
 
-  .project-mockup {
+  .project-desc-ambu{
+    flex: 0 0 auto;
+    margin: 0;
+    text-align: left;
+  }
+  .project-mockup-ambu{
     position: static;
     width: 100%;
+    max-width: 520px;
     transform: none;
-    margin-top: 1rem;
+    margin-top: 0;
+    padding-bottom: 0;
   }
 
-  .badges {
-    justify-content: center;
-  }
+  .badges{ justify-content: center; }
 }
 
 
@@ -584,4 +666,43 @@ body.modal-open{
 @media (max-width: 560px) {
   .skills-grid { grid-template-columns: 1fr; }
   .tools-row { gap: .9rem; }
+}
+
+
+
+@media (max-width: 960px){
+  /* grille claire et robuste */
+  .site-header .header-inner{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "toggle brand burger";
+    align-items: center;
+    gap: 0;
+  }
+
+  /* placer chaque élément à sa zone */
+  .mode-toggle{
+    grid-area: toggle;
+    justify-self: start;
+    margin: 0;
+  }
+
+  .brand{
+    grid-area: brand;
+    justify-self: center;
+    margin: 0;
+  }
+
+  .nav-toggle{
+    grid-area: burger;
+    justify-self: end;
+    z-index: 1001;
+  }
+
+  /* le menu mobile reste aligné à droite du header */
+  .mobile-nav{
+    position: absolute;
+    top: 100%;
+    right: 0;
+  }
 }
