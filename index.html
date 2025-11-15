@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <script src="/script.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -79,50 +79,54 @@
         <h2 id="projects-title" class="section-title">PROJETS</h2>
         <div class="projects-grid">
           <!-- Projet 1 -->
-          <article class="project-card">
-            <div class="project-accent-blue"></div> <!--liseré-->
+          <a href="https://github.com/mgouelo/YouFile" target="_blank" class="project-link">
+            <article class="project-card">
+              <div class="project-accent-blue"></div> <!--liseré-->
 
-            <div class="project-body">
-              <h3 class="project-title">YOUFILE</h3>
-              <div class="project-content">
-                <img src="./assets/Mockup-youfile.png" alt="Mockup projet YouFile" class="project-mockup-youfile"/>
-                <p class="project-desc-youfile">
-                  YouFile est un site web de partage de fichiers inspiré de Youtube.
-                  L'objectif est de faciliter le partage de fichiers en ligne grâce à un système de compte utilisateur
-                  ainsi qu'à des notes et des commentaires pour chaque fichier.
-                </p>
+              <div class="project-body">
+                <h3 class="project-title">YOUFILE</h3>
+                <div class="project-content">
+                  <img src="./assets/Mockup-youfile.png" alt="Mockup projet YouFile" class="project-mockup-youfile"/>
+                  <p class="project-desc-youfile">
+                    YouFile est un site web de partage de fichiers inspiré de Youtube.
+                    L'objectif est de faciliter le partage de fichiers en ligne grâce à un système de compte utilisateur
+                    ainsi qu'à des notes et des commentaires pour chaque fichier.
+                  </p>
+                </div>
+                
+                <ul class="badges">
+                  <li class="badge darkblue">Python</li>
+                  <li class="badge blue">HTML</li>
+                  <li class="badge skyblue">CSS</li>
+                  <li class="badge green">MySQL</li>
+                </ul>
               </div>
-              
-              <ul class="badges">
-                <li class="badge darkblue">Python</li>
-                <li class="badge blue">HTML</li>
-                <li class="badge skyblue">CSS</li>
-                <li class="badge green">MySQL</li>
-              </ul>
-            </div>
-          </article>
+            </article>
+          </a>
 
-          <!-- Projet 2 -->
-          <article class="project-card">
+          <!-- AMBULYMPICS -->
+          <a href="https://github.com/mgouelo/AmbuLympics" target="_blank" class="project-link">
+            <article class="project-card">
 
-            <div class="project-accent-red"></div>
-            <div class="project-body">
-              <h3 class="project-title">AMBULYMPICS</h3>
-              <div class="project-content">
-                <p class="project-desc-ambu">
-                  En réponse à la gestion défectueuse des secouristes durant les JO de Paris 2024, 
-                  j'ai créer une app mobile permettant aux secouristes de consulter et gérer leur emploie du temps, 
-                  recevoir des alertes, et contacter des administrateurs
-                </p>
-                <img src="./assets/Mockup-Ambulympics-cut.png" alt="Mockup projet AmbuLympics" class="project-mockup-ambu"/>
+              <div class="project-accent-red"></div>
+              <div class="project-body">
+                <h3 class="project-title">AMBULYMPICS</h3>
+                <div class="project-content">
+                  <p class="project-desc-ambu">
+                    En réponse à la gestion défectueuse des secouristes durant les JO de Paris 2024, 
+                    j'ai créer une app mobile permettant aux secouristes de consulter et gérer leur emploie du temps, 
+                    recevoir des alertes, et contacter des administrateurs
+                  </p>
+                  <img src="./assets/Mockup-Ambulympics-cut.png" alt="Mockup projet AmbuLympics" class="project-mockup-ambu"/>
+                </div>
+                <ul class="badges">
+                  <li class="badge darkblue">Java</li>
+                  <li class="badge blue">JavaFX</li>
+                  <li class="badge skyblue">MySQL</li>
+                </ul>
               </div>
-              <ul class="badges">
-                <li class="badge darkblue">Java</li>
-                <li class="badge blue">JavaFX</li>
-                <li class="badge skyblue">MySQL</li>
-              </ul>
-            </div>
-          </article>
+            </article>
+          </a>
 
         </div>
       </div>
@@ -130,8 +134,8 @@
 
     <!-- =================== Skills =================== -->
     <section class="skills-carousel" aria-label="Compétences">
+      <h2 class="section-title">COMPETENCES</h2>
       <div class="marquee">
-        <h2 class="section-title">COMPETENCES</h2>
         <div class="marquee-track">
           <!-- ===== Bande 1 ===== -->
           <article class="skill-card" style="--accent:#4f6cf7">

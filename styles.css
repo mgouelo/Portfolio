@@ -37,7 +37,6 @@
 
 html, body {
   min-height: 100%;
-  overflow-x: hidden;
 }
 
 body {
@@ -65,9 +64,11 @@ a {
 
 /* ======= Header ======= */
 .site-header {
-  position: sticky !important;
+  position: sticky;
   top: 0;
-  z-index: 50;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   backdrop-filter: blur(8px);
   background: color-mix(in srgb, var(--bg) 85%, transparent);
   border-bottom: 1px solid var(--nav-bottom);
@@ -142,6 +143,17 @@ a {
   .mode-toggle { justify-self: start; }
   .brand { justify-self: center; margin: 0 auto; }
   .nav-toggle { justify-self: end; z-index: 1001; }
+
+  .site-header .header-inner {
+    grid-template-columns: auto 1fr auto;
+  }
+
+.mode-toggle,
+.nav-toggle {
+  min-width: 48px;
+  display: flex;
+  justify-content: center;
+}  
 
   .mobile-nav {
     position: absolute;
@@ -255,7 +267,10 @@ a {
 }
 
 /* ======= Sections ======= */
-.section { padding: 3.5rem 0; }
+.section {
+  padding: 3.5rem 0;
+  overflow-x: hidden;
+}
 .section-title {
   text-align: center; letter-spacing: .12em;
   font-weight: 800; margin: 0 0 2rem;
@@ -287,6 +302,20 @@ a {
   display: grid;
   grid-template-rows: auto 1fr;
   position: relative;
+
+  transition: transform .22s ease, box-shadow .22s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+}
+
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .project-accent-blue {
@@ -429,9 +458,12 @@ a {
 
 
 /* ======= Skills ======= */
+
+
 .skills-carousel .marquee{
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
+  padding-top: 4px;
   margin-top: 50px;
   margin-bottom: 50px;
 }
@@ -441,17 +473,46 @@ a {
   gap: 22px;
   width: max-content;
   align-items: stretch;
-  animation: skills-scroll 28s linear infinite;
 }
 
-.skills-carousel .marquee:has(.skill-card:hover) .marquee-track {
-  animation-play-state: paused;
+/* Animation pour desktop seulement */
+@media (min-width: 961px) {
+  .skills-carousel .marquee-track{
+    animation: skills-scroll 28s linear infinite;
+  }
+  
+  .skills-carousel .marquee:has(.skill-card:hover) .marquee-track {
+    animation-play-state: paused;
+  }
+  
+  .skills-carousel .marquee:has(.skill-card:focus-within) .marquee-track {
+    animation-play-state: paused;
+  }
 }
 
-.skills-carousel .marquee:has(.skill-card:focus-within) .marquee-track {
-  animation-play-state: paused;
+/* Scroll horizontal pour mobile */
+@media (max-width: 960px) {
+  .skills-carousel .marquee{
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+  }
+  
+  .skills-carousel .marquee::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .skills-carousel .marquee-track{
+    animation: none;
+    width: auto;
+    padding: 0 1rem;
+  }
 }
-
 
 .skill-card{
   width: 320px;
@@ -467,9 +528,15 @@ a {
   box-shadow: 0 2px 10px rgba(0,0,0,.06);
   transition: transform .18s ease, box-shadow .18s ease;
 }
+
 .skill-card:hover{
   transform: translateY(-4px);
   box-shadow: 0 10px 24px rgba(0,0,0,.12);
+}
+
+@keyframes skills-scroll{
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 22px/2)); }
 }
 
 .skill-icon{
@@ -671,7 +738,7 @@ body.modal-open{
 
 
 @media (max-width: 960px){
-  /* grille claire et robuste */
+
   .site-header .header-inner{
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -680,7 +747,7 @@ body.modal-open{
     gap: 0;
   }
 
-  /* placer chaque élément à sa zone */
+
   .mode-toggle{
     grid-area: toggle;
     justify-self: start;
@@ -699,7 +766,6 @@ body.modal-open{
     z-index: 1001;
   }
 
-  /* le menu mobile reste aligné à droite du header */
   .mobile-nav{
     position: absolute;
     top: 100%;
