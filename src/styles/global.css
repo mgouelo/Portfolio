@@ -1230,21 +1230,14 @@ main {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   column-gap: clamp(1.5rem, 4vw, 3rem);
 }
-.scene-fond {
+.galerie {
   grid-column: 2;
   grid-row: 1;
   align-self: start;
   position: sticky;
   top: var(--header-h);
   height: calc(100vh - var(--header-h));
-  display: grid;
-  place-items: center;
-}
-.scene-fond svg {
-  width: 100%;
-  height: 100%;
-  max-height: 86vh;
-  overflow: visible;
+  overflow: hidden;
 }
 .recit-texte {
   grid-column: 1;
@@ -1289,91 +1282,114 @@ main {
   color: var(--texte);
 }
 
-/* Le décor */
-.scene-fond path,
-.scene-fond circle {
+/* La galerie : couloir en perspective et tableaux empilés */
+.galerie svg path,
+.galerie svg rect,
+.galerie svg circle {
   stroke: var(--accent);
-  stroke-width: 1.6;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-.scene-fond .rail {
-  stroke: none;
-}
-
-/* Tableaux : fondu + léger glissement entre deux moments du récit */
-.tableau,
-.element {
-  opacity: 0;
-  transition: opacity 0.9s ease, transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.tableau {
-  transform: translateY(26px) scale(0.98);
-  transform-origin: 50% 60%;
-  transform-box: view-box;
-}
-.tableau.is-on,
-.element.is-on {
-  opacity: 1;
-  transform: none;
-}
-
-/* Les tracés se dessinent à la première apparition du tableau */
-.scene-fond .t {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.8s cubic-bezier(0.55, 0.1, 0.25, 1) 0.15s;
-}
-.scene-fond .vu .t {
-  stroke-dashoffset: 0;
-}
-.scene-fond .vu .t:nth-of-type(3n + 2) {
-  transition-delay: 0.45s;
-}
-.scene-fond .vu .t:nth-of-type(3n) {
-  transition-delay: 0.75s;
-}
-.scene-fond .fin {
+.galerie .fin {
   stroke-width: 1;
-  opacity: 0.6;
+  opacity: 0.55;
 }
-.scene-fond .repousse {
-  transition-delay: 1.4s !important;
+.galerie .defs {
+  position: absolute;
+}
+.couloir {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.couloir path {
+  stroke: var(--texte-doux) !important;
+  opacity: 0.22;
+}
+.couloir .fin {
+  opacity: 0.12;
+}
+
+.tableaux {
+  position: absolute;
+  inset: 0;
+}
+.tableau-recit {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(78%, 46vh);
+  margin: 0;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+.toile {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--mur);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+}
+.toile img,
+.toile .esquisse {
+  position: absolute;
+  left: 8.5%;
+  top: 6.8%;
+  width: 83%;
+  height: 86.4%;
+  object-fit: cover;
+}
+.cadre-trait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.esquisse {
+  color: var(--texte);
+}
+
+.cartel-recit {
+  display: flex;
+  gap: 0.8rem;
+  align-items: baseline;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--texte-doux);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.tableau-recit.is-front .cartel-recit {
+  opacity: 1;
+}
+.cartel-recit-num {
+  font: italic 500 1.1rem var(--serif);
+  color: var(--accent);
+}
+.cartel-recit em {
+  font: italic 500 1.1rem var(--serif);
+  color: var(--texte);
+}
+.cartel-recit small {
+  display: block;
+  font-size: 0.75rem;
 }
 
 .touche {
-  font: 500 26px var(--sans);
+  font: 500 18px var(--sans);
   fill: var(--texte-doux);
   text-anchor: middle;
   letter-spacing: 0.04em;
 }
 .etiquette {
-  font: 500 15px var(--sans);
-  letter-spacing: 0.2em;
+  font: 500 9px var(--sans);
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   fill: var(--texte-doux);
   text-anchor: middle;
-}
-.tableau text {
-  opacity: 0;
-  transition: opacity 0.8s 1.2s;
-}
-.tableau.is-on text {
-  opacity: 1;
-}
-
-/* Le grimpeur, au trait */
-.grimpeur path {
-  stroke: var(--texte);
-  stroke-width: 1.6;
-}
-.grimpeur .g-fond {
-  fill: var(--mur);
-  stroke: none;
-}
-.grimpeur .manche {
-  stroke: var(--accent);
 }
 
 .recit-fin {
@@ -1383,26 +1399,24 @@ main {
   color: var(--texte-doux);
 }
 
-/* Mobile : le décor devient un bandeau collé en haut, le texte défile dessous */
+/* Mobile : la galerie devient un bandeau collé en haut, le texte défile dessous */
 @media (max-width: 860px) {
   .recit {
     display: block;
   }
-  .scene-fond {
+  .galerie {
     z-index: 2;
-    height: 38vh;
+    height: 42vh;
     background: var(--mur);
     border-bottom: 1px solid var(--trait);
     margin-inline: -1rem;
-    padding: 0.6rem 1rem;
   }
-  .scene-fond {
-    overflow: hidden;
+  .tableau-recit {
+    top: 46%;
+    width: min(52%, 24vh);
   }
-  .scene-fond svg {
-    height: 100%;
-    max-height: none;
-    overflow: hidden;
+  .cartel-recit {
+    display: none;
   }
   .scene {
     min-height: 70vh;
@@ -1411,9 +1425,6 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scene-fond .t {
-    stroke-dashoffset: 0;
-  }
   .scene {
     opacity: 1;
   }

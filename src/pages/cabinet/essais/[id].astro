@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import SceneChaudron from '../../../components/SceneChaudron.astro';
+import GalerieRecit from '../../../components/GalerieRecit.astro';
 import { asset } from '../../../lib/asset';
 
 export async function getStaticPaths() {
@@ -10,7 +10,8 @@ export async function getStaticPaths() {
 }
 
 const { essai } = Astro.props;
-const { title, resume, statut, date, mise_en_scene } = essai.data;
+const { title, resume, statut, date, mise_en_scene, tableaux } = essai.data;
+const chapitres = (essai.body?.match(/^## /gm) ?? []).length;
 const { Content } = await render(essai);
 const dateTexte = date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
 const recit = mise_en_scene !== 'aucune';
@@ -31,7 +32,7 @@ const recit = mise_en_scene !== 'aucune';
 
     {recit ? (
       <div class="recit">
-        {mise_en_scene === 'chaudron' && <SceneChaudron />}
+        {mise_en_scene === 'galerie' && <GalerieRecit tableaux={tableaux} chapitres={chapitres} />}
         <div class="recit-texte essai-texte"><Content /></div>
       </div>
     ) : (

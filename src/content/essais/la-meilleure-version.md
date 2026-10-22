@@ -3,7 +3,8 @@ title: Sommes-nous la meilleure version de l'être humain ?
 resume: Un homme dans un chaudron, un philosophe dans une jarre, et ce que la chute fait de nous.
 statut: En cours
 date: 2026-10-22
-mise_en_scene: chaudron
+mise_en_scene: galerie
+tableaux: []
 brouillon: false
 ---
 

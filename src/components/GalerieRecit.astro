@@ -1,0 +1,111 @@
+---
+// Galerie du récit : un tableau par chapitre. Au scroll, le tableau lu s'efface
+// pendant que le suivant, accroché au fond du couloir, grandit jusqu'au premier plan.
+// Sans image fournie (champ « tableaux » de l'essai), une esquisse au trait est affichée.
+import { asset } from '../lib/asset';
+
+interface Tableau {
+  image?: string;
+  titre?: string;
+  artiste?: string;
+  annee?: string;
+  alt?: string;
+}
+interface Props {
+  tableaux: Tableau[];
+  chapitres: number;
+}
+const { tableaux, chapitres } = Astro.props;
+
+const romains = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+
+// Petit grimpeur au trait, réutilisé dans les esquisses
+const grimpeur = (x: number, y: number, rot = 0, s = 1.3) =>
+  `<use href="#grimpeur-recit" transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" />`;
+const crete = `<path d="M30 420 L120 330 L150 350 L240 210 L268 232 L350 70" /><path class="fin" d="M20 420 H380" />`;
+const soleil = (x: number, y: number, r: number) =>
+  `<circle cx="${x}" cy="${y}" r="${r}" /><path class="fin" d="M${x} ${y - r - 14} v-12 M${x} ${y + r + 14} v12 M${x - r - 14} ${y} h-12 M${x + r + 14} ${y} h12" />`;
+
+// Esquisses au trait, une par chapitre (cadre de 400 × 500, zone utile au centre)
+const esquisses = [
+  // I. Le chaudron : au pied de la montagne
+  crete + grimpeur(150, 346, 0),
+  // II. La chute : le chaudron renversé en bas
+  crete + `<path class="fin" d="M200 250 q-50 60 -110 150 M222 270 q-40 60 -90 140" />` + grimpeur(80, 412, -110),
+  // III. Le monde sans chute : la flèche « annuler »
+  `<path d="M270 230 A80 80 0 1 0 150 170" /><path d="M150 170 L134 210 M150 170 L192 182" /><rect class="fin" x="110" y="320" width="180" height="56" rx="10" /><text x="200" y="356" class="touche">Ctrl + Z</text>`,
+  // IV. L'homme dans la jarre
+  soleil(290, 120, 30) +
+    `<path d="M160 210 Q100 260 112 350 Q124 420 190 432 Q256 420 268 350 Q280 260 220 210 Z" /><path d="M154 210 H226 M162 198 H218" /><path class="fin" d="M114 320 Q190 338 266 320 M60 440 H340" />`,
+  // V. Fragile, robuste, plus fort
+  `<path class="fin" d="M50 300 H130 V430 H50 Z M160 300 H240 V430 H160 Z M270 300 H350 V430 H270 Z" />` +
+    `<path d="M70 200 Q70 250 90 255 Q110 250 110 200 Z M90 255 V286 M74 292 H106" /><path class="fin" d="M86 210 L94 224 L88 236" />` +
+    `<path d="M172 292 Q166 256 192 246 Q222 236 232 262 Q238 286 224 292 Z" />` +
+    `<path d="M310 292 C302 250 286 236 282 204 M310 292 C310 250 314 228 310 196 M310 292 C318 250 332 240 336 214 L328 190 M336 214 L348 192" />` +
+    `<text x="90" y="372" class="etiquette">Fragile</text><text x="200" y="372" class="etiquette">Robuste</text><text x="310" y="372" class="etiquette">Plus fort</text>`,
+  // VI. Retour au chaudron : à mi-pente
+  crete + grimpeur(242, 206, 0),
+  // VII. La meilleure version : au sommet
+  crete + soleil(260, 90, 24) + grimpeur(342, 66, 0),
+];
+
+const liste = Array.from({ length: chapitres }, (_, i) => ({ ...(tableaux[i] ?? {}), esquisse: esquisses[i] ?? '' }));
+---
+<div class="galerie" aria-hidden="true">
+  <!-- Le couloir du musée, en perspective -->
+  <svg class="couloir" viewBox="0 0 800 900" preserveAspectRatio="xMidYMid slice" fill="none">
+    <path d="M0 0 L330 330 M800 0 L470 330 M0 900 L330 470 M800 900 L470 470" />
+    <path d="M330 330 H470 V470 H330 Z" />
+    <path class="fin" d="M120 900 L360 470 M680 900 L440 470 M0 700 L330 440 M800 700 L470 440" />
+  </svg>
+
+  <!-- Grimpeur réutilisé dans les esquisses -->
+  <svg width="0" height="0" class="defs">
+    <defs>
+      <g id="grimpeur-recit" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path style="fill: var(--mur)" d="M-16 -30 C-26 -24 -26 -6 -14 -1 C-6 2 6 2 14 -1 C26 -6 26 -24 16 -30 Z" />
+        <path d="M-19 -31 H19" />
+        <path d="M-10 -31 C-12 -40 -10 -48 0 -50 C10 -48 12 -40 10 -31" />
+        <circle style="fill: var(--mur)" cx="0" cy="-60" r="7" />
+        <path d="M-6 -44 L14 -40" />
+        <path style="stroke: var(--accent)" d="M4 -34 L54 -70" />
+        <path d="M48 -80 L62 -64" />
+      </g>
+    </defs>
+  </svg>
+
+  <div class="tableaux">
+    {liste.map((t, i) => (
+      <figure class="tableau-recit" data-index={i}>
+        <div class="toile">
+          {t.image ? (
+            <img src={asset(t.image)} alt={t.alt ?? ''} loading={i < 2 ? 'eager' : 'lazy'} />
+          ) : (
+            <svg class="esquisse" viewBox="0 0 400 500" fill="none" set:html={t.esquisse} />
+          )}
+          <!-- Cadre au trait -->
+          <svg class="cadre-trait" viewBox="0 0 400 500" fill="none">
+            <rect x="2" y="2" width="396" height="496" />
+            <rect x="18" y="18" width="364" height="464" />
+            <path class="fin" d="M2 2 L18 18 M398 2 L382 18 M2 498 L18 482 M398 498 L382 482" />
+          </svg>
+        </div>
+        <figcaption class="cartel-recit">
+          <span class="cartel-recit-num">{romains[i] ?? i + 1}</span>
+          {t.titre ? (
+            <span>
+              <em>{t.titre}</em>
+              {(t.artiste || t.annee) && <small>{[t.artiste, t.annee].filter(Boolean).join(', ')}</small>}
+            </span>
+          ) : (
+            <span><em>Esquisse</em></span>
+          )}
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</div>
+
+<script>
+  import '../scripts/recit.ts';
+</script>

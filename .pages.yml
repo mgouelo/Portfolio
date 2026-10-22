@@ -79,11 +79,31 @@ content:
           values: [Brouillon, En cours, Terminé]
         default: En cours
       - name: mise_en_scene
-        label: Mise en scène (chaque titre devient un chapitre animé)
+        label: Mise en scène (galerie = chaque titre devient un chapitre illustré par un tableau)
         type: select
         options:
-          values: [aucune, chaudron]
+          values: [aucune, galerie]
         default: aucune
+      - name: tableaux
+        label: Tableaux (un par chapitre, dans l'ordre)
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Image
+            type: image
+          - name: titre
+            label: Titre de l'œuvre
+            type: string
+          - name: artiste
+            label: Artiste
+            type: string
+          - name: annee
+            label: Année
+            type: string
+          - name: alt
+            label: Description de l'image (accessibilité)
+            type: string
       - name: date
         label: Date
         type: date

@@ -41,8 +41,20 @@ const essais = defineCollection({
     title: z.string(),
     resume: z.string(),
     statut: z.enum(['Brouillon', 'En cours', 'Terminé']).default('En cours'),
-    // Mise en scène animée au scroll (chaque titre ## devient un chapitre)
-    mise_en_scene: z.enum(['aucune', 'chaudron']).default('aucune'),
+    // Mise en scène au scroll : chaque titre ## devient un chapitre, illustré par un tableau
+    mise_en_scene: z.enum(['aucune', 'galerie']).default('aucune'),
+    // Un tableau par chapitre, dans l'ordre. Sans image, une esquisse au trait est affichée.
+    tableaux: z
+      .array(
+        z.object({
+          image: z.string().optional(),
+          titre: z.string().optional(),
+          artiste: z.string().optional(),
+          annee: z.string().optional(),
+          alt: z.string().optional(),
+        })
+      )
+      .default([]),
     date: z.coerce.date(),
     brouillon: z.boolean().default(false),
   }),
