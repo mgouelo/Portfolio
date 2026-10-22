@@ -55,21 +55,85 @@ content:
         label: Description détaillée
         type: rich-text
 
-  - name: citations
-    label: Citations
-    type: file
-    path: src/data/citations.json
+  - name: essais
+    label: Essais
+    type: collection
+    path: src/content/essais
+    filename: '{primary}.md'
+    view:
+      fields: [title, statut, date]
+      primary: title
     fields:
-      - name: citations
-        label: Citations
-        type: object
-        list: true
-        fields:
-          - name: texte
-            label: Citation
-            type: text
-            required: true
-          - name: auteur
-            label: Auteur
-            type: string
-            required: true
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: resume
+        label: Résumé
+        type: text
+        required: true
+      - name: statut
+        label: Statut
+        type: select
+        options:
+          values: [Brouillon, En cours, Terminé]
+        default: En cours
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: brouillon
+        label: Caché sur le site
+        type: boolean
+        default: false
+      - name: body
+        label: Texte
+        type: rich-text
+
+  - name: lectures
+    label: Bibliothèque
+    type: collection
+    path: src/content/lectures
+    filename: '{primary}.md'
+    view:
+      fields: [titre, auteur, statut]
+      primary: titre
+      sort: [ordre]
+    fields:
+      - name: titre
+        label: Titre
+        type: string
+        required: true
+      - name: auteur
+        label: Auteur
+        type: string
+        required: true
+      - name: annee
+        label: Année de parution
+        type: number
+      - name: type
+        label: Type
+        type: select
+        options:
+          values: [Livre, Jeu vidéo, Film, Article]
+        default: Livre
+      - name: statut
+        label: Statut
+        type: select
+        options:
+          values: [Lu, En cours, À lire]
+        default: Lu
+      - name: resume
+        label: Résumé
+        type: text
+        required: true
+      - name: citation
+        label: Citation relevée (facultatif)
+        type: text
+      - name: ordre
+        label: Ordre d'affichage
+        type: number
+        default: 99
+      - name: body
+        label: Ce que j'en retiens
+        type: rich-text

@@ -972,3 +972,265 @@ main {
     width: min(118%, 420px);
   }
 }
+
+/* =================== Cabinet de philosophie =================== */
+.cabinet-entree {
+  padding-bottom: 0;
+}
+.cabinet-titre {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 600;
+}
+
+/* Lien vers le cabinet depuis l'accueil */
+.annexe {
+  display: block;
+  padding: clamp(1.8rem, 5vw, 3rem);
+  border: 1px solid var(--trait);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-profond) 30%, transparent), transparent 60%),
+    var(--cartel);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.annexe:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.annexe h2 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 600;
+}
+.annexe-lien {
+  display: inline-block;
+  margin-top: 1.4rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+/* Statut d'un essai */
+.statut {
+  display: inline-block;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.statut-fini {
+  background: var(--accent);
+  color: var(--mur);
+}
+
+/* Essais : feuillets de manuscrit */
+.manuscrits {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 1.4rem;
+}
+.manuscrit {
+  position: relative;
+  display: grid;
+  gap: 0.8rem;
+  justify-items: start;
+  padding: 2rem 2rem 1.8rem;
+  background: var(--passe-partout);
+  color: #2a1a1a;
+  box-shadow: var(--ombre);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* lignes de cahier */
+  background-image: repeating-linear-gradient(to bottom, transparent 0 31px, rgba(89, 34, 35, 0.12) 31px 32px);
+}
+.manuscrit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.1rem;
+  width: 1px;
+  background: rgba(200, 41, 36, 0.45);
+}
+.manuscrit:hover {
+  transform: translateY(-4px) rotate(-0.4deg);
+}
+.manuscrit h3 {
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+.manuscrit p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #4d3a38;
+}
+.manuscrit .statut {
+  color: #a8201c;
+  border-color: #a8201c;
+}
+.manuscrit-lire {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #a8201c;
+}
+
+/* Bibliothèque : des volumes avec leur dos relié */
+.rayonnage {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 1.4rem;
+}
+.volume {
+  display: flex;
+  background: var(--cartel);
+  border: 1px solid var(--trait);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.volume:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.volume-dos {
+  flex: 0 0 18px;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 22px, rgba(255, 255, 255, 0.18) 22px 23px, transparent 23px 26px, rgba(255, 255, 255, 0.18) 26px 27px, transparent 27px 100%),
+    var(--accent-profond);
+  background-size: 100% 100%;
+}
+.volume-corps {
+  padding: 1.4rem 1.5rem;
+}
+.volume-corps p {
+  margin: 0;
+}
+.volume-meta {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.volume-meta em {
+  font-style: normal;
+  color: var(--texte-doux);
+}
+.volume h3 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-top: 0.4rem;
+}
+.volume-auteur {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--texte-doux);
+}
+.volume-resume {
+  margin-top: 0.8rem !important;
+  font-size: 0.92rem;
+}
+.volume-citation {
+  margin: 1rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--accent);
+  font: italic 500 1.1rem var(--serif);
+}
+
+/* =================== Page d'essai =================== */
+.essai {
+  max-width: 46rem;
+  padding-block: clamp(2rem, 6vw, 4rem) clamp(4rem, 9vw, 7rem);
+}
+.essai-tete h1 {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 600;
+}
+.essai-resume {
+  font: italic 500 1.35rem/1.4 var(--serif);
+  color: var(--texte-doux);
+  margin: 1rem 0 0;
+}
+.essai-statut {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.85rem;
+  color: var(--texte-doux);
+  margin: 1.4rem 0 0;
+}
+
+.triangle {
+  margin: clamp(2rem, 6vw, 3.5rem) auto;
+  max-width: 480px;
+}
+.triangle svg {
+  width: 100%;
+  overflow: visible;
+}
+.triangle path {
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.6, 0.1, 0.3, 1);
+}
+.triangle path:first-child {
+  transition-duration: 2.2s;
+}
+.triangle path:nth-child(n + 2) {
+  transition-delay: 0.9s;
+}
+.triangle.is-visible path {
+  stroke-dashoffset: 0;
+}
+.triangle text {
+  fill: var(--texte);
+  text-anchor: middle;
+}
+.triangle .t-num {
+  font: italic 500 20px var(--serif);
+  fill: var(--accent);
+}
+.triangle .t-nom {
+  font: 600 24px var(--serif);
+}
+.triangle .t-sous {
+  font: 400 12px var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--texte-doux);
+}
+.triangle text[text-anchor='start'] {
+  text-anchor: start;
+}
+
+.essai-texte {
+  font-size: 1.05rem;
+}
+.essai-texte h2 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 2.6rem 0 0.8rem;
+}
+.essai-texte ul {
+  padding-left: 1.2rem;
+}
+.essai-texte li {
+  margin-bottom: 0.5rem;
+}
+.essai-texte li::marker {
+  color: var(--accent);
+}
+.essai-texte > p:first-child em {
+  color: var(--texte-doux);
+}
+.volume-note {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--trait);
+  font-size: 0.9rem;
+  color: var(--texte-doux);
+}

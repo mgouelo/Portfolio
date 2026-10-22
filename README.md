@@ -26,7 +26,8 @@ Seules les personnes ayant un accès en écriture au dépôt peuvent modifier le
 ## Organisation
 
 - `src/content/projets/` : un fichier `.md` par projet
-- `src/data/` : citations, compétences, outils
+- `src/content/essais/` et `src/content/lectures/` : le cabinet de philosophie
+- `src/data/` : compétences, outils
 - `src/components/`, `src/layouts/`, `src/pages/` : le site
 - `public/` : images, icônes et pages de compétences
 - `.pages.yml` : configuration de l'interface Pages CMS

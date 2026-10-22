@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Triangle from '../../../components/Triangle.astro';
+import { asset } from '../../../lib/asset';
+
+export async function getStaticPaths() {
+  const essais = await getCollection('essais', ({ data }) => !data.brouillon);
+  return essais.map((essai) => ({ params: { id: essai.id }, props: { essai } }));
+}
+
+const { essai } = Astro.props;
+const { title, resume, statut, date } = essai.data;
+const { Content } = await render(essai);
+const dateTexte = date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+---
+<Base title={`${title} – Matthieu Gouélo`} description={resume}>
+  <article class="essai container">
+    <a class="retour" href={asset('cabinet/')}><span aria-hidden="true">←</span> Retour au cabinet</a>
+
+    <header class="essai-tete">
+      <p class="salle-numero">Essai · {dateTexte}</p>
+      <h1>{title}</h1>
+      <p class="essai-resume">{resume}</p>
+      {statut !== 'Terminé' && (
+        <p class="essai-statut"><span class="statut statut-cours">{statut}</span> Ce texte est en cours d’écriture et évolue au fil du temps.</p>
+      )}
+    </header>
+
+    {essai.id === 'diogene-getting-over-it-antifragile' && <Triangle />}
+
+    <div class="essai-texte">
+      <Content />
+    </div>
+  </article>
+</Base>

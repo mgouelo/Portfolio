@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Citation from '../components/Citation.astro';
 import Oeuvre from '../components/Oeuvre.astro';
 import Competences from '../components/Competences.astro';
 import Arcade from '../components/Arcade.astro';
@@ -39,8 +38,6 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).
       </figcaption>
     </figure>
   </section>
-
-  <div class="container"><Citation /></div>
 
   <!-- =================== Salle I : Collection =================== -->
   <section class="salle" id="collection" aria-labelledby="collection-titre">
@@ -89,6 +86,19 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).
           </li>
         ))}
       </ul>
+    </div>
+  </section>
+
+  <!-- =================== Annexe : Cabinet de philosophie =================== -->
+  <section class="salle" id="cabinet" aria-labelledby="cabinet-titre">
+    <div class="container">
+      <a class="annexe reveal" href={asset('cabinet/')}>
+        <Colonne />
+        <p class="salle-numero">Annexe</p>
+        <h2 id="cabinet-titre">Cabinet de philosophie</h2>
+        <p class="salle-intro">Hors du code : mes lectures et un essai en cours sur Diogène, Getting Over It et l’antifragilité.</p>
+        <span class="annexe-lien">Entrer dans le cabinet <span aria-hidden="true">→</span></span>
+      </a>
     </div>
   </section>
 

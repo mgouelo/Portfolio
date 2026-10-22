@@ -35,15 +35,6 @@ themeBtn?.addEventListener('click', () => {
   label();
 });
 
-// ===== Citation tirée au hasard à chaque visite =====
-const citation = document.querySelector<HTMLElement>('.citation');
-if (citation?.dataset.citations) {
-  const liste: { texte: string; auteur: string }[] = JSON.parse(citation.dataset.citations);
-  const c = liste[Math.floor(Math.random() * liste.length)];
-  citation.querySelector('.citation-texte')!.textContent = c.texte;
-  citation.querySelector('.citation-auteur')!.textContent = c.auteur;
-}
-
 // ===== Apparition douce au scroll =====
 const reveals = document.querySelectorAll('.reveal');
 if (reduceMotion || !('IntersectionObserver' in window)) {

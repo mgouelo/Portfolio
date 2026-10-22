@@ -1,0 +1,74 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Colonne from '../../components/Colonne.astro';
+import { asset } from '../../lib/asset';
+
+const essais = (await getCollection('essais', ({ data }) => !data.brouillon)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const lectures = await Promise.all(
+  (await getCollection('lectures'))
+    .sort((a, b) => a.data.ordre - b.data.ordre)
+    .map(async (l) => ({ ...l, Note: (await render(l)).Content }))
+);
+---
+<Base title="Cabinet de philosophie – Matthieu Gouélo" description="Lectures et essais de Matthieu Gouélo autour de la philosophie.">
+  <section class="salle cabinet-entree">
+    <div class="container">
+      <header class="salle-tete reveal">
+        <Colonne />
+        <p class="salle-numero">Annexe</p>
+        <h1 class="cabinet-titre">Cabinet de philosophie</h1>
+        <p class="salle-intro">
+          En dehors du code, je lis et j’écris sur la philosophie. Cette salle rassemble mes essais, terminés ou en
+          cours, et les œuvres qui les nourrissent.
+        </p>
+      </header>
+    </div>
+  </section>
+
+  <section class="salle" aria-labelledby="essais-titre">
+    <div class="container">
+      <header class="salle-tete reveal">
+        <p class="salle-numero">Manuscrits</p>
+        <h2 id="essais-titre">Essais</h2>
+      </header>
+      <div class="manuscrits">
+        {essais.map((e) => (
+          <a class="manuscrit reveal" href={asset(`cabinet/essais/${e.id}/`)}>
+            <span class={`statut statut-${e.data.statut === 'Terminé' ? 'fini' : 'cours'}`}>{e.data.statut}</span>
+            <h3>{e.data.title}</h3>
+            <p>{e.data.resume}</p>
+            <span class="manuscrit-lire">Lire <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="salle" aria-labelledby="bibliotheque-titre">
+    <div class="container">
+      <header class="salle-tete reveal">
+        <p class="salle-numero">Rayonnages</p>
+        <h2 id="bibliotheque-titre">Bibliothèque</h2>
+        <p class="salle-intro">Livres, jeux et autres œuvres qui m’ont fait réfléchir.</p>
+      </header>
+      <ul class="rayonnage">
+        {lectures.map((l, i) => (
+          <li class="volume reveal" style={`--delai:${i * 80}ms`}>
+            <span class="volume-dos" aria-hidden="true"></span>
+            <div class="volume-corps">
+              <p class="volume-meta">{l.data.type}{l.data.annee && ` · ${l.data.annee}`} · <em>{l.data.statut}</em></p>
+              <h3>{l.data.titre}</h3>
+              <p class="volume-auteur">{l.data.auteur}</p>
+              <p class="volume-resume">{l.data.resume}</p>
+              {l.data.citation && <blockquote class="volume-citation">« {l.data.citation} »</blockquote>}
+              <div class="volume-note"><l.Note /></div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
