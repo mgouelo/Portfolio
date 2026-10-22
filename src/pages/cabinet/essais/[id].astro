@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import GalerieRecit from '../../../components/GalerieRecit.astro';
+import Montagne3D from '../../../components/Montagne3D.astro';
 import { asset } from '../../../lib/asset';
 
 export async function getStaticPaths() {
@@ -33,6 +34,7 @@ const recit = mise_en_scene !== 'aucune';
     {recit ? (
       <div class="recit">
         {mise_en_scene === 'galerie' && <GalerieRecit tableaux={tableaux} chapitres={chapitres} />}
+        {mise_en_scene === 'montagne3d' && <Montagne3D />}
         <div class="recit-texte essai-texte"><Content /></div>
       </div>
     ) : (

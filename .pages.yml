@@ -82,7 +82,7 @@ content:
         label: Mise en scène (galerie = chaque titre devient un chapitre illustré par un tableau)
         type: select
         options:
-          values: [aucune, galerie]
+          values: [aucune, galerie, montagne3d]
         default: aucune
       - name: tableaux
         label: Tableaux (un par chapitre, dans l'ordre)

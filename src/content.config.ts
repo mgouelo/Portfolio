@@ -42,7 +42,7 @@ const essais = defineCollection({
     resume: z.string(),
     statut: z.enum(['Brouillon', 'En cours', 'Terminé']).default('En cours'),
     // Mise en scène au scroll : chaque titre ## devient un chapitre, illustré par un tableau
-    mise_en_scene: z.enum(['aucune', 'galerie']).default('aucune'),
+    mise_en_scene: z.enum(['aucune', 'galerie', 'montagne3d']).default('aucune'),
     // Un tableau par chapitre, dans l'ordre. Sans image, une esquisse au trait est affichée.
     tableaux: z
       .array(
