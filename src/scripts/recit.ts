@@ -1,14 +1,15 @@
-import { gsap } from 'gsap';
-
 // Récit au scroll : chaque titre ## du texte devient un chapitre.
-// Le grimpeur avance sur la montagne selon le chapitre lu, chute au chapitre 2,
-// et les accessoires du décor apparaissent quand leur chapitre est à l'écran.
+// Selon le chapitre lu, un tableau du décor apparaît ; sur la montagne,
+// le grimpeur avance, chute au chapitre II puis remonte.
+// Les mouvements sont lissés image par image pour rester fluides.
 
 const recit = document.querySelector<HTMLElement>('.recit');
 const texte = recit?.querySelector<HTMLElement>('.recit-texte');
 const svg = recit?.querySelector<SVGSVGElement>('.scene-fond svg');
 
 if (recit && texte && svg) {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // 1. Regrouper chaque titre et ses paragraphes dans une <section class="scene">
   const scenes: HTMLElement[] = [];
   let courante: HTMLElement | null = null;
@@ -24,31 +25,29 @@ if (recit && texte && svg) {
 
   // 2. Trajet du grimpeur par chapitre : [avancement dans le chapitre, position sur le rail (0 = pied, 1 = sommet)]
   const trajets: [number, number][][] = [
-    [[0, 0], [0.9, 0.32]], //                    Le chaudron : il grimpe
-    [[0, 0.32], [0.4, 0.42], [0.6, 0], [1, 0]], // La chute
-    [[0, 0], [1, 0]], //                          Le monde sans chute
-    [[0, 0], [1, 0.04]], //                       L'homme dans la jarre
-    [[0, 0.04], [1, 0.1]], //                     Ce qui gagne à être secoué
-    [[0, 0.1], [0.9, 0.8]], //                    Retour au chaudron : il remonte, plus vite
-    [[0, 0.8], [0.8, 1], [1, 1]], //              La meilleure version : le sommet
+    [[0, 0], [0.9, 0.34]], //                     I. Le chaudron : il grimpe
+    [[0, 0.34], [0.35, 0.44], [0.6, 0], [1, 0]], // II. La chute
+    [[0, 0], [1, 0]], //                           III à V : la montagne est cachée
+    [[0, 0], [1, 0]],
+    [[0, 0], [1, 0]],
+    [[0, 0], [0.9, 0.78]], //                      VI. Retour au chaudron : il remonte, plus vite
+    [[0, 0.78], [0.75, 1], [1, 1]], //             VII. Le sommet
   ];
-  const position = (scene: number, p: number) => {
-    const t = trajets[Math.min(scene, trajets.length - 1)];
+  const interpoler = (t: [number, number][], p: number) => {
     for (let i = 1; i < t.length; i++) {
       if (p <= t[i][0]) {
         const [p0, v0] = t[i - 1];
         const [p1, v1] = t[i];
-        return v0 + (v1 - v0) * ((p - p0) / (p1 - p0 || 1));
+        const k = (p - p0) / (p1 - p0 || 1);
+        return v0 + (v1 - v0) * k;
       }
     }
     return t[t.length - 1][1];
   };
-  // La chute : le chaudron tourne sur lui-même pendant qu'il dévale
-  const enChute = (scene: number, p: number) => scene === 1 && p > 0.4 && p < 0.6;
-  // Deux tours complets pendant la chute (720° revient visuellement à 0°, sans « rembobiner » ensuite)
-  const rotation = (scene: number, p: number) => {
-    if (scene < 1 || (scene === 1 && p <= 0.4)) return 0;
-    if (scene === 1 && p < 0.6) return ((p - 0.4) / 0.2) * 720;
+  // Pendant la chute, le chaudron fait deux tours (720° = 0° visuellement, donc pas de retour en arrière ensuite)
+  const rotation = (s: number, p: number) => {
+    if (s === 0 || (s === 1 && p <= 0.35)) return 0;
+    if (s === 1 && p < 0.6) return ((p - 0.35) / 0.25) * 720;
     return 720;
   };
 
@@ -56,50 +55,88 @@ if (recit && texte && svg) {
   const longueur = rail.getTotalLength();
   const grimpeur = svg.querySelector<SVGGElement>('.grimpeur')!;
   const corps = svg.querySelector<SVGGElement>('.grimpeur-corps')!;
-  const marteau = svg.querySelector<SVGGElement>('.marteau')!;
-  const accessoires = [...svg.querySelectorAll<SVGGElement>('.accessoire')];
+  const bras = svg.querySelector<SVGGElement>('.bras')!;
+  const animes = [...svg.querySelectorAll<SVGGElement>('[data-scenes]')];
 
-  const etat = { f: 0, rot: 0 };
-  const placer = () => {
-    const pt = rail.getPointAtLength(etat.f * longueur);
-    grimpeur.setAttribute('transform', `translate(${pt.x} ${pt.y}) scale(1.5)`);
-    corps.setAttribute('transform', `rotate(${etat.rot})`);
+  // 3. Positions des chapitres, recalculées quand la mise en page change
+  let bornes: { haut: number; hauteur: number }[] = [];
+  const mesurer = () => {
+    bornes = scenes.map((sc) => {
+      const r = sc.getBoundingClientRect();
+      return { haut: r.top + window.scrollY, hauteur: r.height };
+    });
   };
 
+  // État affiché (lissé) et état visé (calculé au scroll)
+  const vise = { f: 0, rot: 0, balancier: 0 };
+  const affiche = { f: 0, rot: 0, balancier: 0 };
   let sceneActive = -1;
-  const miseAJour = () => {
-    // Sur mobile, le décor occupe le haut de l'écran : on lit plus bas
-    const milieu = window.innerHeight * (window.innerWidth <= 860 ? 0.68 : 0.55);
-    // Chapitre lu : le dernier dont le haut a passé le milieu de l'écran
+
+  const lire = () => {
+    const milieu = window.scrollY + window.innerHeight * (window.innerWidth <= 860 ? 0.68 : 0.55);
     let s = 0;
-    scenes.forEach((sc, i) => {
-      if (sc.getBoundingClientRect().top <= milieu) s = i;
+    bornes.forEach((b, i) => {
+      if (b.haut <= milieu) s = i;
     });
-    const r = scenes[s].getBoundingClientRect();
-    const p = Math.min(1, Math.max(0, (milieu - r.top) / r.height));
+    const b = bornes[s];
+    const p = Math.min(1, Math.max(0, (milieu - b.haut) / b.hauteur));
 
     if (s !== sceneActive) {
       sceneActive = s;
       scenes.forEach((sc, i) => sc.classList.toggle('is-active', i === s));
-      accessoires.forEach((a) => a.classList.toggle('is-on', (a.dataset.scenes ?? '').split(' ').includes(String(s))));
-      recit.dataset.scene = String(s);
+      animes.forEach((el) => {
+        const on = (el.dataset.scenes ?? '').split(' ').includes(String(s));
+        el.classList.toggle('is-on', on);
+        if (on) el.classList.add('vu'); // déjà dessiné : ne se retrace plus
+      });
     }
 
-    const chute = enChute(s, p);
-    gsap.to(etat, {
-      f: position(s, p),
-      rot: rotation(s, p),
-      duration: chute ? 0.15 : 0.6,
-      ease: 'power2.out',
-      overwrite: true,
-      onUpdate: placer,
-    });
-    // Le marteau se balance au rythme du scroll
-    marteau.setAttribute('transform', `rotate(${Math.sin(window.scrollY / 70) * 28 - 6} 0 -20)`);
+    vise.f = interpoler(trajets[Math.min(s, trajets.length - 1)], p);
+    vise.rot = rotation(s, p);
+    // Le marteau se balance au rythme du scroll, comme un grimpeur qui cherche sa prise
+    vise.balancier = Math.sin(window.scrollY / 110) * 34;
   };
 
-  placer();
-  miseAJour();
-  window.addEventListener('scroll', miseAJour, { passive: true });
-  window.addEventListener('resize', miseAJour);
+  const dessiner = () => {
+    const pt = rail.getPointAtLength(affiche.f * longueur);
+    grimpeur.setAttribute('transform', `translate(${pt.x.toFixed(2)} ${pt.y.toFixed(2)}) scale(1.7)`);
+    corps.setAttribute('transform', `rotate(${affiche.rot.toFixed(2)} 0 -22)`);
+    bras.setAttribute('transform', `rotate(${affiche.balancier.toFixed(2)} 0 -70)`);
+  };
+
+  // 4. Boucle d'animation : on rapproche l'affichage de la cible à chaque image
+  let enCours = false;
+  const boucle = () => {
+    const vitesse = reduceMotion ? 1 : 0.1;
+    // La chute est plus rapide que l'ascension
+    const vitesseChute = reduceMotion ? 1 : 0.22;
+    const k = vise.f < affiche.f - 0.02 ? vitesseChute : vitesse;
+    affiche.f += (vise.f - affiche.f) * k;
+    affiche.rot += (vise.rot - affiche.rot) * vitesseChute;
+    affiche.balancier += (vise.balancier - affiche.balancier) * 0.12;
+    dessiner();
+
+    const reste =
+      Math.abs(vise.f - affiche.f) + Math.abs(vise.rot - affiche.rot) / 360 + Math.abs(vise.balancier - affiche.balancier) / 90;
+    if (reste > 0.0005) requestAnimationFrame(boucle);
+    else enCours = false;
+  };
+  const relancer = () => {
+    lire();
+    if (!enCours) {
+      enCours = true;
+      requestAnimationFrame(boucle);
+    }
+  };
+
+  mesurer();
+  relancer();
+  window.addEventListener('scroll', relancer, { passive: true });
+  const remesurer = () => {
+    mesurer();
+    relancer();
+  };
+  window.addEventListener('resize', remesurer);
+  window.addEventListener('load', remesurer);
+  document.fonts?.ready.then(remesurer);
 }

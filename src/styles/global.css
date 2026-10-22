@@ -1298,74 +1298,140 @@ main {
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-.scene-fond .montagne path {
-  stroke: var(--texte-doux);
-  stroke-width: 1.3;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: trace 3s cubic-bezier(0.6, 0.1, 0.3, 1) 0.2s forwards;
-}
-.scene-fond .montagne path:nth-child(n + 2) {
-  animation-delay: 1.6s;
-  animation-duration: 1.4s;
-}
 .scene-fond .rail {
   stroke: none;
 }
-.accessoire {
+
+/* Tableaux : fondu + léger glissement entre deux moments du récit */
+.tableau,
+.element {
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.9s ease, transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.accessoire.is-on {
+.tableau {
+  transform: translateY(26px) scale(0.98);
+  transform-origin: 50% 60%;
+  transform-box: view-box;
+}
+.tableau.is-on,
+.element.is-on {
   opacity: 1;
+  transform: none;
 }
-.accessoire path {
+
+/* Les tracés se dessinent à la première apparition du tableau */
+.scene-fond .t {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.3s cubic-bezier(0.6, 0.1, 0.3, 1);
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.55, 0.1, 0.25, 1) 0.15s;
 }
-.accessoire .hachures {
+.scene-fond .vu .t {
+  stroke-dashoffset: 0;
+}
+.scene-fond .vu .t:nth-of-type(3n + 2) {
+  transition-delay: 0.45s;
+}
+.scene-fond .vu .t:nth-of-type(3n) {
+  transition-delay: 0.75s;
+}
+.scene-fond .hachures {
   stroke-width: 1;
-  opacity: 0.6;
+  opacity: 0.55;
 }
-.accessoire .coupure {
-  stroke-dasharray: 0.06 0.04;
+.scene-fond .coupure {
+  stroke-dasharray: 0.08 0.05;
 }
-.accessoire text {
-  opacity: 0;
-  transition: opacity 0.6s 0.6s;
+.scene-fond .repousse {
+  transition-delay: 1.4s !important;
 }
-.accessoire.is-on path {
-  stroke-dashoffset: 0;
+.scene-fond .conquerant {
+  stroke: var(--texte);
+  transition-delay: 0.9s !important;
 }
-.accessoire.is-on .coupure {
-  stroke-dashoffset: 0;
+
+/* La montagne bordeaux */
+.montagne .massif {
+  fill: color-mix(in srgb, var(--accent-profond) 55%, transparent);
+  stroke-width: 2;
 }
-.accessoire.is-on text {
-  opacity: 1;
+:root.light .montagne .massif {
+  fill: color-mix(in srgb, var(--accent-profond) 22%, transparent);
 }
+
 .touche {
-  font: 600 26px var(--sans);
+  font: 600 34px var(--sans);
   fill: var(--accent);
   text-anchor: middle;
   letter-spacing: 0.04em;
 }
+.etiquette {
+  font: 500 15px var(--sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  fill: var(--texte-doux);
+  text-anchor: middle;
+}
+.tableau text {
+  opacity: 0;
+  transition: opacity 0.8s 1.2s;
+}
+.tableau.is-on text {
+  opacity: 1;
+}
 
-.grimpeur path,
-.grimpeur circle {
-  stroke: var(--texte);
-  stroke-width: 2;
+/* Le grimpeur (silhouette inspirée du jeu) */
+.grimpeur .peau {
+  fill: var(--passe-partout);
+  stroke: var(--cadre);
+  stroke-width: 1.4;
 }
 .grimpeur .tete {
-  fill: var(--mur);
+  stroke-width: 1.4;
 }
-.grimpeur .chaudron {
-  fill: var(--accent-profond);
-  stroke: var(--accent);
+.grimpeur .barbe {
+  fill: #2a1d18;
+  stroke: #2a1d18;
+  stroke-width: 1;
+}
+.grimpeur .oreille {
+  stroke: var(--cadre);
+  stroke-width: 1.2;
+}
+.grimpeur .membre-contour {
+  stroke: var(--cadre);
+  stroke-width: 9;
+}
+.grimpeur .membre {
+  stroke: var(--passe-partout);
+  stroke-width: 6.5;
+}
+.grimpeur .main {
+  fill: var(--passe-partout);
+  stroke: var(--cadre);
+  stroke-width: 1.2;
+}
+.grimpeur .manche {
+  stroke: #c9a24a;
+  stroke-width: 4.5;
 }
 .grimpeur .marteau-tete {
-  stroke-width: 6;
-  stroke: var(--accent);
+  fill: #8b8b8b;
+  stroke: #5a5a5a;
+  stroke-width: 1.4;
+}
+.grimpeur .chaudron {
+  fill: #121010;
+  stroke: #000;
+  stroke-width: 1.4;
+}
+.grimpeur .chaudron-bord {
+  fill: #1e1b1b;
+  stroke: #000;
+  stroke-width: 1.4;
+}
+.grimpeur .reflet {
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 2;
 }
 
 .recit-fin {
@@ -1403,8 +1469,7 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scene-fond .montagne path,
-  .accessoire.is-on path {
+  .scene-fond .t {
     stroke-dashoffset: 0;
   }
   .scene {
