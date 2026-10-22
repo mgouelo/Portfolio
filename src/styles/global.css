@@ -4,16 +4,17 @@
 
 /* ----- Variables : Nocturne (sombre, par défaut) ----- */
 :root {
-  --mur: #141312;            /* couleur du mur de la salle */
-  --mur-2: #1c1a18;
-  --texte: #efe9df;
-  --texte-doux: #a9a296;
-  --laiton: #c9a96a;          /* filets, numéros, accents */
-  --cadre: #0a0908;           /* baguette des cadres */
-  --passe-partout: #f2ede4;
-  --cartel: #1f1d1a;
-  --trait: rgba(239, 233, 223, 0.12);
-  --ombre: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 10px 20px -10px rgba(0, 0, 0, 0.6);
+  --mur: #150f0f;            /* couleur du mur de la salle */
+  --mur-2: #1f1616;
+  --texte: #f3e9e3;
+  --texte-doux: #b3a29c;
+  --accent: #d63a33;          /* rouge, éclairci pour rester lisible sur fond sombre */
+  --accent-profond: #592223;  /* bordeaux */
+  --cadre: #3a1516;           /* baguette des cadres, bordeaux sombre */
+  --passe-partout: #f4ece4;
+  --cartel: #1e1515;
+  --trait: rgba(243, 233, 227, 0.12);
+  --ombre: 0 30px 60px -20px rgba(0, 0, 0, 0.75), 0 10px 20px -10px rgba(0, 0, 0, 0.6);
 
   --serif: 'Cormorant Garamond', 'Times New Roman', serif;
   --sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -27,16 +28,17 @@
 
 /* ----- Variables : Jour (clair) ----- */
 :root.light {
-  --mur: #f4f0e8;
-  --mur-2: #ebe5da;
-  --texte: #1d1b18;
-  --texte-doux: #6b655b;
-  --laiton: #9a7b3f;
-  --cadre: #2a2622;
-  --passe-partout: #fbf9f5;
-  --cartel: #fffdf9;
-  --trait: rgba(29, 27, 24, 0.12);
-  --ombre: 0 30px 50px -25px rgba(60, 45, 20, 0.35), 0 8px 16px -8px rgba(60, 45, 20, 0.25);
+  --mur: #f5eee6;
+  --mur-2: #ece1d6;
+  --texte: #1f1515;
+  --texte-doux: #6f5e59;
+  --accent: #a8201c;
+  --accent-profond: #592223;
+  --cadre: #592223;
+  --passe-partout: #fdf9f4;
+  --cartel: #fffaf5;
+  --trait: rgba(31, 21, 21, 0.13);
+  --ombre: 0 30px 50px -25px rgba(89, 34, 35, 0.4), 0 8px 16px -8px rgba(89, 34, 35, 0.25);
   color-scheme: light;
 }
 
@@ -60,7 +62,7 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.4s ease, color 0.4s ease;
   /* léger halo d'éclairage en haut de la salle */
-  background-image: radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--laiton) 10%, transparent), transparent 70%);
+  background-image: radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
   background-repeat: no-repeat;
 }
 
@@ -89,7 +91,7 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--laiton);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -146,7 +148,7 @@ h3 {
   right: 0;
   bottom: 0;
   height: 1px;
-  background: var(--laiton);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -178,7 +180,7 @@ h3 {
   transition: border-color 0.3s;
 }
 .mode-toggle:hover {
-  border-color: var(--laiton);
+  border-color: var(--accent);
 }
 
 .nav-toggle {
@@ -243,7 +245,7 @@ h3 {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 0.9rem 1.6rem;
-  border: 1px solid var(--laiton);
+  border: 1px solid var(--accent);
   color: var(--texte);
   position: relative;
   overflow: hidden;
@@ -254,7 +256,7 @@ h3 {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--laiton);
+  background: var(--accent);
   transform: translateY(101%);
   transition: transform 0.35s ease;
   z-index: -1;
@@ -302,7 +304,7 @@ h3 {
   top: 1.4rem;
   bottom: 1.4rem;
   width: 2px;
-  background: var(--laiton);
+  background: var(--accent);
 }
 
 .cartel p {
@@ -311,7 +313,7 @@ h3 {
 
 .cartel-numero {
   font: italic 500 1rem var(--serif);
-  color: var(--laiton);
+  color: var(--accent);
   margin-bottom: 0.4rem !important;
 }
 
@@ -337,7 +339,7 @@ h3 {
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--laiton);
+  color: var(--accent);
   margin-right: 0.4rem;
 }
 
@@ -356,12 +358,12 @@ h3 {
   text-transform: uppercase;
 }
 .cartel-liens a {
-  border-bottom: 1px solid var(--laiton);
+  border-bottom: 1px solid var(--accent);
   padding-bottom: 2px;
   transition: color 0.2s;
 }
 .cartel-liens a:hover {
-  color: var(--laiton);
+  color: var(--accent);
 }
 
 /* =================== Entrée (hero) =================== */
@@ -377,7 +379,7 @@ h3 {
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--laiton);
+  color: var(--accent);
   margin: 0 0 1.2rem;
 }
 
@@ -455,7 +457,7 @@ h3 {
 }
 .citation-mark {
   font: 600 5rem/1 var(--serif);
-  color: var(--laiton);
+  color: var(--accent);
   display: block;
   height: 2.6rem;
   opacity: 0.8;
@@ -492,7 +494,7 @@ h3 {
 }
 .salle-numero {
   font: italic 500 1.05rem var(--serif);
-  color: var(--laiton);
+  color: var(--accent);
   margin: 0 0 0.3rem;
   display: flex;
   align-items: center;
@@ -502,7 +504,7 @@ h3 {
   content: '';
   width: 3rem;
   height: 1px;
-  background: var(--laiton);
+  background: var(--accent);
 }
 .salle-tete h2 {
   font-size: clamp(2.4rem, 5.5vw, 3.8rem);
@@ -525,7 +527,7 @@ h3 {
   gap: clamp(1.5rem, 5vw, 4rem);
   align-items: center;
 }
-.oeuvre:nth-child(even) .cadre {
+.oeuvre:nth-of-type(even) .cadre {
   order: 2;
 }
 
@@ -544,7 +546,7 @@ h3 {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 30%), rgba(255, 240, 210, 0.22), transparent 45%);
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 30%), rgba(255, 225, 215, 0.24), transparent 45%);
   opacity: 0;
   transition: opacity 0.4s;
   mix-blend-mode: soft-light;
@@ -563,7 +565,7 @@ h3 {
   .oeuvre {
     grid-template-columns: 1fr;
   }
-  .oeuvre:nth-child(even) .cadre {
+  .oeuvre:nth-of-type(even) .cadre {
     order: 0;
   }
 }
@@ -592,14 +594,14 @@ h3 {
   transition: border-color 0.3s, transform 0.3s;
 }
 .plaque:hover {
-  border-color: color-mix(in srgb, var(--laiton) 60%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
   transform: translateY(-3px);
 }
 .plaque-romain {
   grid-area: romain;
   justify-self: end;
   font: italic 500 1.3rem var(--serif);
-  color: var(--laiton);
+  color: var(--accent);
 }
 .plaque-icone {
   grid-area: icone;
@@ -627,11 +629,11 @@ h3 {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   padding: 0.35rem 0.75rem;
-  border: 1px solid var(--laiton);
+  border: 1px solid var(--accent);
   transition: background 0.2s, color 0.2s;
 }
 a.niveau:hover {
-  background: var(--laiton);
+  background: var(--accent);
   color: var(--mur);
 }
 .niveau-a-venir {
@@ -749,14 +751,14 @@ a.niveau:hover {
   min-width: 0;
 }
 .contact:hover {
-  border-color: var(--laiton);
+  border-color: var(--accent);
   transform: translateY(-3px);
 }
 .contact svg {
   width: 26px;
   height: 26px;
   flex: none;
-  color: var(--laiton);
+  color: var(--accent);
 }
 .contact span {
   display: grid;
@@ -783,7 +785,7 @@ a.niveau:hover {
   transition: color 0.2s;
 }
 .retour:hover {
-  color: var(--laiton);
+  color: var(--accent);
 }
 .fiche-grille {
   display: grid;
@@ -820,7 +822,7 @@ a.niveau:hover {
 }
 .footer-mono {
   width: 52px;
-  color: var(--laiton);
+  color: var(--accent);
   margin-bottom: 0.6rem;
 }
 .footer-note {
@@ -858,5 +860,115 @@ a.niveau:hover {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* =================== Dessins au trait =================== */
+.dessin path {
+  stroke: var(--accent);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+/* Arcade derrière le portrait : se trace au chargement */
+.portrait {
+  position: relative;
+  isolation: isolate;
+}
+.arcade {
+  position: absolute;
+  z-index: -1;
+  top: -20%;
+  left: 50%;
+  width: min(150%, 520px);
+  transform: translateX(-50%);
+  opacity: 0.7;
+}
+.arcade path {
+  animation: trace 2.4s cubic-bezier(0.6, 0.1, 0.3, 1) forwards;
+}
+.arcade path:nth-child(2) { animation-delay: 0.25s; }
+.arcade path:nth-child(3) { animation-delay: 1.2s; }
+.arcade path:nth-child(n + 4) { animation-delay: 1.5s; animation-duration: 1.6s; }
+.arcade .hachures {
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+/* Colonne en tête de salle : se trace quand la salle apparaît */
+.colonne {
+  width: 30px;
+  display: block;
+  margin-bottom: 0.9rem;
+}
+.colonne path {
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.6, 0.1, 0.3, 1) 0.2s;
+}
+.colonne path:nth-child(n + 4) { transition-delay: 0.6s; }
+.is-visible .colonne path {
+  stroke-dashoffset: 0;
+}
+
+@keyframes trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* =================== Fil rouge de la collection =================== */
+.collection {
+  position: relative;
+  isolation: isolate;
+}
+.fil-rouge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: -1;
+}
+.fil-rouge path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+.fil-rouge circle {
+  fill: var(--mur);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.fil-rouge circle.is-on {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dessin path {
+    stroke-dashoffset: 0;
+  }
+  .fil-rouge circle {
+    transform: none;
+  }
+}
+
+/* L'arcade et le fil rouge débordent volontairement : on évite le scroll horizontal */
+main {
+  overflow-x: clip;
+}
+@media (max-width: 820px) {
+  .arcade {
+    top: -8%;
+    width: min(118%, 420px);
   }
 }

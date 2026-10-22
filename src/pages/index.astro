@@ -4,6 +4,8 @@ import Base from '../layouts/Base.astro';
 import Citation from '../components/Citation.astro';
 import Oeuvre from '../components/Oeuvre.astro';
 import Competences from '../components/Competences.astro';
+import Arcade from '../components/Arcade.astro';
+import Colonne from '../components/Colonne.astro';
 import outils from '../data/outils.json';
 import { asset } from '../lib/asset';
 
@@ -25,6 +27,7 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).
     </div>
 
     <figure class="portrait">
+      <Arcade />
       <div class="cadre cadre-portrait">
         <div class="passe-partout">
           <img src={asset('assets/portrait.jpg')} alt="Portrait de Matthieu Gouélo" />
@@ -43,11 +46,14 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).
   <section class="salle" id="collection" aria-labelledby="collection-titre">
     <div class="container">
       <header class="salle-tete reveal">
+        <Colonne />
         <p class="salle-numero">Salle I</p>
         <h2 id="collection-titre">La collection</h2>
         <p class="salle-intro">Une sélection de projets, chacun avec son cartel. Cliquez sur une œuvre pour la voir de plus près.</p>
       </header>
       <div class="collection">
+        <!-- Le fil rouge relie les cartels et se déroule au scroll (voir scripts/fil-rouge.ts) -->
+        <svg class="fil-rouge" aria-hidden="true"><path /></svg>
         {projets.map((p, i) => <Oeuvre projet={p} numero={i + 1} />)}
       </div>
     </div>
@@ -57,6 +63,7 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).
   <section class="salle" id="competences" aria-labelledby="competences-titre">
     <div class="container">
       <header class="salle-tete reveal">
+        <Colonne />
         <p class="salle-numero">Salle II</p>
         <h2 id="competences-titre">Compétences</h2>
         <p class="salle-intro">Les six compétences du BUT Informatique. Chaque niveau ouvre ses preuves.</p>
@@ -69,6 +76,7 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).
   <section class="salle" id="materiaux" aria-labelledby="materiaux-titre">
     <div class="container">
       <header class="salle-tete reveal">
+        <Colonne />
         <p class="salle-numero">Salle III</p>
         <h2 id="materiaux-titre">Matériaux &amp; techniques</h2>
         <p class="salle-intro">Les langages et outils employés dans les œuvres.</p>
@@ -88,6 +96,7 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).
   <section class="salle salle-contact" id="contact" aria-labelledby="contact-titre">
     <div class="container">
       <header class="salle-tete reveal">
+        <Colonne />
         <p class="salle-numero">Livre d’or</p>
         <h2 id="contact-titre">Laisser un mot</h2>
       </header>
