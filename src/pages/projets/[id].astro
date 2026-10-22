@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cartel from '../../components/Cartel.astro';
+import { asset } from '../../lib/asset';
+
+export async function getStaticPaths() {
+  const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).sort(
+    (a, b) => a.data.ordre - b.data.ordre || b.data.annee - a.data.annee
+  );
+  return projets.map((projet, i) => ({ params: { id: projet.id }, props: { projet, numero: i + 1 } }));
+}
+
+const { projet, numero } = Astro.props;
+const { title, annee, resume, image, imageAlt, technologies, lien } = projet.data;
+const { Content } = await render(projet);
+---
+<Base title={`${title} – Matthieu Gouélo`} description={resume}>
+  <article class="fiche container">
+    <a class="retour" href={`${asset('')}#collection`}><span aria-hidden="true">←</span> Retour à la collection</a>
+
+    <div class="fiche-grille">
+      <div class="cadre cadre-grand">
+        <div class="passe-partout">
+          <img src={asset(image)} alt={imageAlt} style={`view-transition-name: oeuvre-${projet.id}`} />
+        </div>
+      </div>
+
+      <Cartel numero={numero} title={title} annee={annee} technologies={technologies} titleTag="h1">
+        <div class="fiche-texte"><Content /></div>
+        {lien && (
+          <p class="cartel-liens">
+            <a href={lien} target="_blank" rel="noreferrer">Code source <span aria-hidden="true">↗</span></a>
+          </p>
+        )}
+      </Cartel>
+    </div>
+  </article>
+</Base>

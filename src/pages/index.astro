@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Oeuvre from '../components/Oeuvre.astro';
+import Competences from '../components/Competences.astro';
+import Arcade from '../components/Arcade.astro';
+import Colonne from '../components/Colonne.astro';
+import outils from '../data/outils.json';
+import { asset } from '../lib/asset';
+
+const projets = (await getCollection('projets', ({ data }) => !data.brouillon)).sort(
+  (a, b) => a.data.ordre - b.data.ordre || b.data.annee - a.data.annee
+);
+---
+<Base>
+  <!-- =================== Entrée =================== -->
+  <section class="entree container" id="entree" aria-labelledby="entree-titre">
+    <div class="entree-texte">
+      <p class="surtitre">Galerie Matthieu Gouélo · Entrée libre</p>
+      <h1 id="entree-titre">Étudiant<br /><em>en informatique</em></h1>
+      <p class="entree-intro">
+        Je suis Matthieu Gouélo, étudiant créatif et passionné de développement. J’aime créer des sites et
+        des apps <strong>user-friendly</strong> qui combinent fonctionnalités et esthétisme.
+      </p>
+      <a class="btn" href="#collection">Visiter la collection</a>
+    </div>
+
+    <figure class="portrait">
+      <Arcade />
+      <div class="cadre cadre-portrait">
+        <div class="passe-partout">
+          <img src={asset('assets/portrait.jpg')} alt="Portrait de Matthieu Gouélo" />
+        </div>
+      </div>
+      <figcaption class="cartel cartel-mini">
+        <p class="cartel-titre">Portrait de l’artiste en développeur</p>
+        <p class="cartel-technique"><span>Technique</span> lumière naturelle sur pixels</p>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- =================== Salle I : Collection =================== -->
+  <section class="salle" id="collection" aria-labelledby="collection-titre">
+    <div class="container">
+      <header class="salle-tete reveal">
+        <Colonne />
+        <p class="salle-numero">Salle I</p>
+        <h2 id="collection-titre">La collection</h2>
+        <p class="salle-intro">Une sélection de projets, chacun avec son cartel. Cliquez sur une œuvre pour la voir de plus près.</p>
+      </header>
+      <div class="collection">
+        <!-- Le fil rouge relie les cartels et se déroule au scroll (voir scripts/fil-rouge.ts) -->
+        <svg class="fil-rouge" aria-hidden="true"><path /></svg>
+        {projets.map((p, i) => <Oeuvre projet={p} numero={i + 1} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== Salle II : Compétences =================== -->
+  <section class="salle" id="competences" aria-labelledby="competences-titre">
+    <div class="container">
+      <header class="salle-tete reveal">
+        <Colonne />
+        <p class="salle-numero">Salle II</p>
+        <h2 id="competences-titre">Compétences</h2>
+        <p class="salle-intro">Les six compétences du BUT Informatique. Chaque niveau ouvre ses preuves.</p>
+      </header>
+      <Competences />
+    </div>
+  </section>
+
+  <!-- =================== Salle III : Matériaux =================== -->
+  <section class="salle" id="materiaux" aria-labelledby="materiaux-titre">
+    <div class="container">
+      <header class="salle-tete reveal">
+        <Colonne />
+        <p class="salle-numero">Salle III</p>
+        <h2 id="materiaux-titre">Matériaux &amp; techniques</h2>
+        <p class="salle-intro">Les langages et outils employés dans les œuvres.</p>
+      </header>
+      <ul class="materiaux reveal">
+        {outils.outils.map((o) => (
+          <li class="materiau">
+            <img src={asset(o.icone)} alt="" />
+            <span>{o.nom}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- =================== Annexe : Cabinet de philosophie =================== -->
+  <section class="salle" id="cabinet" aria-labelledby="cabinet-titre">
+    <div class="container">
+      <a class="annexe reveal" href={asset('cabinet/')}>
+        <Colonne />
+        <p class="salle-numero">Annexe</p>
+        <h2 id="cabinet-titre">Cabinet de philosophie</h2>
+        <p class="salle-intro">Hors du code : mes lectures et un essai en cours sur Diogène, Getting Over It et l’antifragilité.</p>
+        <span class="annexe-lien">Entrer dans le cabinet <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- =================== Livre d'or : Contact =================== -->
+  <section class="salle salle-contact" id="contact" aria-labelledby="contact-titre">
+    <div class="container">
+      <header class="salle-tete reveal">
+        <Colonne />
+        <p class="salle-numero">Livre d’or</p>
+        <h2 id="contact-titre">Laisser un mot</h2>
+      </header>
+      <div class="contacts reveal">
+        <a class="contact" href="https://github.com/mgouelo" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297a12 12 0 0 0-3.79 23.4c.6.111.82-.26.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.547-1.388-1.336-1.758-1.336-1.758-1.091-.746.083-.73.083-.73 1.206.085 1.84 1.239 1.84 1.239 1.07 1.836 2.809 1.306 3.493.998.108-.775.418-1.306.762-1.606-2.665-.305-5.467-1.334-5.467-5.931 0-1.31.469-2.382 1.236-3.222-.124-.304-.536-1.527.117-3.183 0 0 1.008-.322 3.3 1.23a11.51 11.51 0 0 1 6.003 0c2.291-1.552 3.297-1.23 3.297-1.23.655 1.656.243 2.879.12 3.183.77.84 1.236 1.912 1.236 3.222 0 4.61-2.806 5.624-5.479 5.922.43.371.823 1.103.823 2.222v3.293c0 .319.219.694.825.576A12.003 12.003 0 0 0 12 .297z"/></svg>
+          <span>GitHub<small>mgouelo</small></span>
+        </a>
+        <a class="contact" href="mailto:matthieugouelo@gmail.com">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.511l-8 5.333-8-5.333V6h16zM4 18V8.489l7.386 4.924a1 1 0 0 0 1.228 0L20 8.489V18H4z"/></svg>
+          <span>E-mail<small>matthieugouelo@gmail.com</small></span>
+        </a>
+        <a class="contact" href="https://www.linkedin.com/in/matthieu-gouelo/" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.94v5.666H9.35V9h3.414v1.561h.048c.476-.9 1.636-1.852 3.366-1.852 3.599 0 4.264 2.369 4.264 5.455v6.288zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM6.959 20.452H3.713V9h3.246v11.452zM22.225 0H1.771C.792 0 0 .771 0 1.723v20.549C0 23.229.792 24 1.771 24h20.451C23.2 24 24 23.229 24 22.271V1.723C24 .771 23.2 0 22.222 0z"/></svg>
+          <span>LinkedIn<small>matthieu-gouelo</small></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,139 @@
+# Configuration de Pages CMS (https://pagescms.org)
+# Connecte-toi sur app.pagescms.org avec ton compte GitHub, puis ouvre ce dépôt.
+# Seules les personnes ayant accès en écriture au dépôt peuvent modifier le contenu.
+
+media:
+  input: public/assets
+  output: /assets
+
+content:
+  - name: projets
+    label: Projets
+    type: collection
+    path: src/content/projets
+    filename: '{primary}.md'
+    view:
+      fields: [title, annee, brouillon]
+      primary: title
+      sort: [ordre, annee]
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: annee
+        label: Année
+        type: number
+        required: true
+      - name: resume
+        label: Résumé (affiché sur le cartel)
+        type: text
+        required: true
+      - name: image
+        label: Image (mockup)
+        type: image
+        required: true
+      - name: imageAlt
+        label: Description de l'image (accessibilité)
+        type: string
+      - name: technologies
+        label: Technologies
+        type: string
+        list: true
+      - name: lien
+        label: Lien vers le code (GitHub)
+        type: string
+      - name: ordre
+        label: Ordre d'affichage (1 = en premier)
+        type: number
+        default: 99
+      - name: brouillon
+        label: Brouillon (caché sur le site)
+        type: boolean
+        default: false
+      - name: body
+        label: Description détaillée
+        type: rich-text
+
+  - name: essais
+    label: Essais
+    type: collection
+    path: src/content/essais
+    filename: '{primary}.md'
+    view:
+      fields: [title, statut, date]
+      primary: title
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: resume
+        label: Résumé
+        type: text
+        required: true
+      - name: statut
+        label: Statut
+        type: select
+        options:
+          values: [Brouillon, En cours, Terminé]
+        default: En cours
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: brouillon
+        label: Caché sur le site
+        type: boolean
+        default: false
+      - name: body
+        label: Texte
+        type: rich-text
+
+  - name: lectures
+    label: Bibliothèque
+    type: collection
+    path: src/content/lectures
+    filename: '{primary}.md'
+    view:
+      fields: [titre, auteur, statut]
+      primary: titre
+      sort: [ordre]
+    fields:
+      - name: titre
+        label: Titre
+        type: string
+        required: true
+      - name: auteur
+        label: Auteur
+        type: string
+        required: true
+      - name: annee
+        label: Année de parution
+        type: number
+      - name: type
+        label: Type
+        type: select
+        options:
+          values: [Livre, Jeu vidéo, Film, Article]
+        default: Livre
+      - name: statut
+        label: Statut
+        type: select
+        options:
+          values: [Lu, En cours, À lire]
+        default: Lu
+      - name: resume
+        label: Résumé
+        type: text
+        required: true
+      - name: citation
+        label: Citation relevée (facultatif)
+        type: text
+      - name: ordre
+        label: Ordre d'affichage
+        type: number
+        default: 99
+      - name: body
+        label: Ce que j'en retiens
+        type: rich-text

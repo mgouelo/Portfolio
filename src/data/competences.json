@@ -1,0 +1,16 @@
+{
+  "competences": [
+    { "nom": "Réaliser", "icone": "M13 3a2 2 0 0 0-4 0v1H7a2 2 0 0 0-2 2v2h1a2 2 0 1 1 0 4H5v2a2 2 0 0 0 2 2h2v1a2 2 0 1 0 4 0v-1h2a2 2 0 0 0 2-2v-2h1a2 2 0 1 0 0-4h-1V6a2 2 0 0 0-2-2h-2V3z",
+      "niveaux": [ { "nom": "BUT1", "page": "skills/Realiser/BUT1/Realiser1.html" }, { "nom": "BUT2" }, { "nom": "BUT3" } ] },
+    { "nom": "Optimiser", "icone": "M21 7.5a6 6 0 0 1-8.9 5.3L5.6 19.3a2 2 0 1 1-2.8-2.8l6.5-6.5A6 6 0 0 1 21 7.5z",
+      "niveaux": [ { "nom": "BUT1", "page": "skills/Optimiser/BUT1/Optimiser1.html" }, { "nom": "BUT2" }, { "nom": "BUT3" } ] },
+    { "nom": "Administrer", "icone": "M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 18c-2.8 0-5-3.6-5-8s2.2-8 5-8 5 3.6 5 8-2.2 8-5 8zm0-14c-1.7 0-3 2.7-3 6s1.3 6 3 6 3-2.7 3-6-1.3-6-3-6z",
+      "niveaux": [ { "nom": "BUT1", "page": "skills/Administrer/BUT1/Administrer1.html" }, { "nom": "BUT2" } ] },
+    { "nom": "Gérer", "icone": "M4 19h16v2H2V3h2v16zm4-6h2v6H8v-6zm4-4h2v10h-2V9zm4-3h2v13h-2V6z",
+      "niveaux": [ { "nom": "BUT1", "page": "skills/Gerer/BUT1/Gerer1.html" }, { "nom": "BUT2" } ] },
+    { "nom": "Conduire", "icone": "M12 2c3.5 0 6 2.7 6 6 0 4.2-3.2 8.7-6 12-2.8-3.3-6-7.8-6-12 0-3.3 2.5-6 6-6zm0 4a2 2 0 1 0 .001 4.001A2 2 0 0 0 12 6z",
+      "niveaux": [ { "nom": "BUT1", "page": "skills/Conduire/BUT1/Conduire1.html" }, { "nom": "BUT2" } ] },
+    { "nom": "Collaborer", "icone": "M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM8 13a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm8 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4zM8 15c-2.7 0-8 1.3-8 4v2h6v-2c0-1 .4-1.9 1-2.7V15z",
+      "niveaux": [ { "nom": "BUT1", "page": "skills/Collaborer/BUT1/Collaborer1.html" }, { "nom": "BUT2" }, { "nom": "BUT3" } ] }
+  ]
+}

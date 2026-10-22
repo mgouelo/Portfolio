@@ -1,0 +1,39 @@
+---
+import Monogramme from './Monogramme.astro';
+import { asset } from '../lib/asset';
+
+const accueil = asset('');
+const salles = [
+  { href: `${accueil}#entree`, label: 'Entrée' },
+  { href: `${accueil}#collection`, label: 'Collection' },
+  { href: `${accueil}#competences`, label: 'Compétences' },
+  { href: `${accueil}cabinet/`, label: 'Cabinet' },
+  { href: `${accueil}#contact`, label: 'Contact' },
+];
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={accueil} aria-label="Accueil">
+      <Monogramme />
+    </a>
+
+    <nav class="main-nav" aria-label="Principale">
+      <ul>
+        {salles.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="mode-toggle" type="button" aria-label="Basculer le thème">Nocturne</button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="mobile-nav" aria-label="Mobile" hidden>
+    <ul>
+      {salles.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+    </ul>
+  </nav>
+</header>
