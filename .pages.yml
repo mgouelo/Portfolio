@@ -78,6 +78,12 @@ content:
         options:
           values: [Brouillon, En cours, Terminé]
         default: En cours
+      - name: mise_en_scene
+        label: Mise en scène (chaque titre devient un chapitre animé)
+        type: select
+        options:
+          values: [aucune, chaudron]
+        default: aucune
       - name: date
         label: Date
         type: date

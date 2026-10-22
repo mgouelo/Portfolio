@@ -1166,47 +1166,6 @@ main {
   margin: 1.4rem 0 0;
 }
 
-.triangle {
-  margin: clamp(2rem, 6vw, 3.5rem) auto;
-  max-width: 480px;
-}
-.triangle svg {
-  width: 100%;
-  overflow: visible;
-}
-.triangle path {
-  transition: stroke-dashoffset 1.6s cubic-bezier(0.6, 0.1, 0.3, 1);
-}
-.triangle path:first-child {
-  transition-duration: 2.2s;
-}
-.triangle path:nth-child(n + 2) {
-  transition-delay: 0.9s;
-}
-.triangle.is-visible path {
-  stroke-dashoffset: 0;
-}
-.triangle text {
-  fill: var(--texte);
-  text-anchor: middle;
-}
-.triangle .t-num {
-  font: italic 500 20px var(--serif);
-  fill: var(--accent);
-}
-.triangle .t-nom {
-  font: 600 24px var(--serif);
-}
-.triangle .t-sous {
-  font: 400 12px var(--sans);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  fill: var(--texte-doux);
-}
-.triangle text[text-anchor='start'] {
-  text-anchor: start;
-}
-
 .essai-texte {
   font-size: 1.05rem;
 }
@@ -1233,4 +1192,222 @@ main {
   border-top: 1px dashed var(--trait);
   font-size: 0.9rem;
   color: var(--texte-doux);
+}
+
+/* =================== Récit au scroll =================== */
+.essai-recit {
+  max-width: var(--container);
+}
+.essai-recit .essai-tete {
+  min-height: calc(100vh - var(--header-h) - 8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 48rem;
+}
+.essai-recit .essai-tete h1 {
+  font-size: clamp(2.8rem, 7.5vw, 5.6rem);
+}
+.defiler {
+  margin-top: 3rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+}
+.defiler span {
+  display: inline-block;
+  animation: flotte 1.8s ease-in-out infinite;
+}
+@keyframes flotte {
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.recit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  column-gap: clamp(1.5rem, 4vw, 3rem);
+}
+.scene-fond {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  display: grid;
+  place-items: center;
+}
+.scene-fond svg {
+  width: 100%;
+  height: 100%;
+  max-height: 86vh;
+  overflow: visible;
+}
+.recit-texte {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* Les chapitres */
+.scene {
+  min-height: 100vh;
+  padding-block: 18vh;
+  opacity: 0.22;
+  transition: opacity 0.6s ease;
+}
+.scene.is-active {
+  opacity: 1;
+}
+.recit-texte h2 {
+  margin-top: 0;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+}
+.recit-texte h2::before {
+  content: counter(chapitre, upper-roman) '.';
+  counter-increment: chapitre;
+  display: block;
+  font: italic 500 1.1rem var(--serif);
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.recit-texte {
+  counter-reset: chapitre;
+  font-size: 1.12rem;
+  line-height: 1.75;
+}
+.recit-texte p {
+  margin: 0 0 1.1rem;
+}
+.recit-texte strong {
+  font-family: var(--serif);
+  font-size: 1.3em;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--texte);
+}
+
+/* Le décor */
+.scene-fond path,
+.scene-fond circle {
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.scene-fond .montagne path {
+  stroke: var(--texte-doux);
+  stroke-width: 1.3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: trace 3s cubic-bezier(0.6, 0.1, 0.3, 1) 0.2s forwards;
+}
+.scene-fond .montagne path:nth-child(n + 2) {
+  animation-delay: 1.6s;
+  animation-duration: 1.4s;
+}
+.scene-fond .rail {
+  stroke: none;
+}
+.accessoire {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.accessoire.is-on {
+  opacity: 1;
+}
+.accessoire path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.3s cubic-bezier(0.6, 0.1, 0.3, 1);
+}
+.accessoire .hachures {
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.accessoire .coupure {
+  stroke-dasharray: 0.06 0.04;
+}
+.accessoire text {
+  opacity: 0;
+  transition: opacity 0.6s 0.6s;
+}
+.accessoire.is-on path {
+  stroke-dashoffset: 0;
+}
+.accessoire.is-on .coupure {
+  stroke-dashoffset: 0;
+}
+.accessoire.is-on text {
+  opacity: 1;
+}
+.touche {
+  font: 600 26px var(--sans);
+  fill: var(--accent);
+  text-anchor: middle;
+  letter-spacing: 0.04em;
+}
+
+.grimpeur path,
+.grimpeur circle {
+  stroke: var(--texte);
+  stroke-width: 2;
+}
+.grimpeur .tete {
+  fill: var(--mur);
+}
+.grimpeur .chaudron {
+  fill: var(--accent-profond);
+  stroke: var(--accent);
+}
+.grimpeur .marteau-tete {
+  stroke-width: 6;
+  stroke: var(--accent);
+}
+
+.recit-fin {
+  max-width: 40rem;
+  padding-block: 4rem 2rem;
+  border-top: 1px solid var(--trait);
+  color: var(--texte-doux);
+}
+
+/* Mobile : le décor devient un bandeau collé en haut, le texte défile dessous */
+@media (max-width: 860px) {
+  .recit {
+    display: block;
+  }
+  .scene-fond {
+    z-index: 2;
+    height: 38vh;
+    background: var(--mur);
+    border-bottom: 1px solid var(--trait);
+    margin-inline: -1rem;
+    padding: 0.6rem 1rem;
+  }
+  .scene-fond {
+    overflow: hidden;
+  }
+  .scene-fond svg {
+    height: 100%;
+    max-height: none;
+    overflow: hidden;
+  }
+  .scene {
+    min-height: 70vh;
+    padding-block: 8vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-fond .montagne path,
+  .accessoire.is-on path {
+    stroke-dashoffset: 0;
+  }
+  .scene {
+    opacity: 1;
+  }
 }

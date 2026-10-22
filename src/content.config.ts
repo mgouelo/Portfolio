@@ -41,6 +41,8 @@ const essais = defineCollection({
     title: z.string(),
     resume: z.string(),
     statut: z.enum(['Brouillon', 'En cours', 'Terminé']).default('En cours'),
+    // Mise en scène animée au scroll (chaque titre ## devient un chapitre)
+    mise_en_scene: z.enum(['aucune', 'chaudron']).default('aucune'),
     date: z.coerce.date(),
     brouillon: z.boolean().default(false),
   }),

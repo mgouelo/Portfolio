@@ -1,0 +1,71 @@
+---
+// Décor du récit : une montagne dessinée au trait, un grimpeur dans son chaudron
+// et des accessoires qui apparaissent selon le chapitre (voir scripts/recit.ts).
+// data-scenes : numéros des chapitres (à partir de 0) où l'accessoire est visible.
+---
+<div class="scene-fond" aria-hidden="true">
+  <svg viewBox="0 0 800 900" fill="none" preserveAspectRatio="xMidYMid meet">
+    <!-- Soleil (l'homme de la jarre, puis le sommet) -->
+    <g class="accessoire" data-scenes="3 6">
+      <path pathLength="1" d="M600 120 m-34 0 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0" />
+      <path pathLength="1" d="M600 62 V44 M600 178 V196 M542 120 H524 M658 120 H676 M559 79 L546 66 M641 161 L654 174 M559 161 L546 174 M641 79 L654 66" />
+    </g>
+
+    <!-- La montagne : un amas d'objets empilés -->
+    <g class="montagne">
+      <path pathLength="1" d="M0 900 L110 770 L170 800 L280 610 L330 650 L440 430 L500 480 L590 250 L640 290 L720 80 L800 190 V900" />
+      <!-- objets dans la pente : tuyau, meuble, rochers -->
+      <path pathLength="1" d="M210 760 h70 v18 h-70 Z M228 760 v18 M262 760 v18" />
+      <path pathLength="1" d="M360 600 l50 -30 l12 20 l-50 30 Z" />
+      <path pathLength="1" d="M470 520 q20 -30 50 -10 q20 20 -10 40 q-30 10 -40 -30 Z" />
+      <path pathLength="1" d="M560 380 h46 v40 h-46 Z M560 400 h46 M583 380 v40" />
+      <path pathLength="1" d="M650 230 q10 -24 34 -12 q16 14 -4 28 q-24 8 -30 -16 Z" />
+    </g>
+
+    <!-- Chemin de l'ascension (invisible, sert de rail au grimpeur) -->
+    <path class="rail" d="M70 840 C150 790 220 720 280 650 S400 510 450 470 S560 320 600 280 S690 140 720 96" />
+
+    <!-- Ctrl + Z : la flèche « annuler » -->
+    <g class="accessoire" data-scenes="2">
+      <path pathLength="1" d="M300 330 A100 100 0 1 0 170 230" />
+      <path pathLength="1" d="M170 230 L150 274 M170 230 L214 244" />
+      <path pathLength="1" d="M120 430 h150 a14 14 0 0 1 14 14 v40 a14 14 0 0 1 -14 14 h-150 a14 14 0 0 1 -14 -14 v-40 a14 14 0 0 1 14 -14 Z" />
+      <text x="195" y="474" class="touche">Ctrl + Z</text>
+    </g>
+
+    <!-- La jarre -->
+    <g class="accessoire" data-scenes="3">
+      <path pathLength="1" d="M150 380 Q100 440 112 520 Q126 600 190 616 Q254 600 268 520 Q280 440 230 380 Z" />
+      <path pathLength="1" d="M146 380 H234 M152 366 H228 M158 366 V380 M222 366 V380" />
+      <path pathLength="1" d="M128 470 Q190 490 252 470 M118 540 Q190 562 262 540" />
+      <path class="hachures" pathLength="1" d="M128 560 l12 -12 M136 580 l14 -14 M150 596 l14 -14 M240 590 l12 -12 M252 572 l10 -10" />
+    </g>
+
+    <!-- L'Hydre : trois cous, une tête coupée qui repousse en deux -->
+    <g class="accessoire" data-scenes="4">
+      <path pathLength="1" d="M190 640 C176 560 120 540 110 470 M190 640 C190 560 200 520 186 450 M190 640 C206 560 254 540 266 476" />
+      <path pathLength="1" d="M110 470 m-12 0 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0 M186 450 m-12 0 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0" />
+      <path pathLength="1" d="M266 476 L246 430 M266 476 L292 432 M246 430 m-10 0 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 M292 432 m-10 0 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0" />
+      <path pathLength="1" d="M250 498 L284 486" class="coupure" />
+      <path pathLength="1" d="M150 640 H230" />
+    </g>
+
+    <!-- Le grimpeur : chaudron, buste, marteau -->
+    <g class="grimpeur">
+      <g class="grimpeur-corps">
+        <circle class="tete" cx="0" cy="-36" r="8" />
+        <path d="M0 -28 V-6" />
+        <g class="marteau">
+          <path d="M0 -20 L20 -28 L42 -50" />
+          <path class="marteau-tete" d="M34 -58 L50 -42" />
+        </g>
+        <path class="chaudron" d="M-24 -6 Q-24 20 0 20 Q24 20 24 -6 Z" />
+        <path d="M-28 -6 H28" />
+      </g>
+    </g>
+  </svg>
+</div>
+
+<script>
+  import '../scripts/recit.ts';
+</script>

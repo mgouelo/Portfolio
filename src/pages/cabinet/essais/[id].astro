@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import Triangle from '../../../components/Triangle.astro';
+import SceneChaudron from '../../../components/SceneChaudron.astro';
 import { asset } from '../../../lib/asset';
 
 export async function getStaticPaths() {
@@ -10,12 +10,13 @@ export async function getStaticPaths() {
 }
 
 const { essai } = Astro.props;
-const { title, resume, statut, date } = essai.data;
+const { title, resume, statut, date, mise_en_scene } = essai.data;
 const { Content } = await render(essai);
 const dateTexte = date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+const recit = mise_en_scene !== 'aucune';
 ---
 <Base title={`${title} – Matthieu Gouélo`} description={resume}>
-  <article class="essai container">
+  <article class:list={['essai', 'container', { 'essai-recit': recit }]}>
     <a class="retour" href={asset('cabinet/')}><span aria-hidden="true">←</span> Retour au cabinet</a>
 
     <header class="essai-tete">
@@ -25,12 +26,23 @@ const dateTexte = date.toLocaleDateString('fr-FR', { month: 'long', year: 'numer
       {statut !== 'Terminé' && (
         <p class="essai-statut"><span class="statut statut-cours">{statut}</span> Ce texte est en cours d’écriture et évolue au fil du temps.</p>
       )}
+      {recit && <p class="defiler">Faites défiler <span aria-hidden="true">↓</span></p>}
     </header>
 
-    {essai.id === 'diogene-getting-over-it-antifragile' && <Triangle />}
+    {recit ? (
+      <div class="recit">
+        {mise_en_scene === 'chaudron' && <SceneChaudron />}
+        <div class="recit-texte essai-texte"><Content /></div>
+      </div>
+    ) : (
+      <div class="essai-texte"><Content /></div>
+    )}
 
-    <div class="essai-texte">
-      <Content />
-    </div>
+    {recit && (
+      <footer class="recit-fin">
+        <p class="salle-numero">Sources</p>
+        <p>Les œuvres qui ont inspiré ce récit seront dévoilées ici.</p>
+      </footer>
+    )}
   </article>
 </Base>
