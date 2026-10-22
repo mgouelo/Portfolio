@@ -1,111 +1,73 @@
 ---
-// Décor du récit : plusieurs tableaux dessinés au trait, un par moment de l'histoire.
+// Décor du récit, au trait fin comme l'arcade et les colonnes de l'accueil.
 // data-scenes : numéros des chapitres (à partir de 0) où le tableau ou l'élément est visible.
 // Les tracés de classe « t » se dessinent à leur première apparition (voir scripts/recit.ts).
 ---
 <div class="scene-fond" aria-hidden="true">
   <svg viewBox="0 0 800 900" fill="none" preserveAspectRatio="xMidYMid meet">
-    <!-- ============ Tableau : la montagne (chapitres I, II, VI, VII) ============ -->
-    <g class="tableau montagne" data-scenes="0 1 5 6">
-      <!-- soleil au sommet, pour le dernier chapitre -->
+    <!-- ============ La montagne (chapitres I, II, VI, VII) ============ -->
+    <g class="tableau" data-scenes="0 1 5 6">
       <g class="element" data-scenes="6">
-        <path class="t" pathLength="1" d="M560 130 m-38 0 a38 38 0 1 0 76 0 a38 38 0 1 0 -76 0" />
-        <path class="t" pathLength="1" d="M560 66 V46 M560 194 V214 M496 130 H476 M624 130 H644 M515 85 L501 71 M605 175 L619 189 M515 175 L501 189 M605 85 L619 71" />
+        <path class="t" pathLength="1" d="M560 150 m-32 0 a32 32 0 1 0 64 0 a32 32 0 1 0 -64 0" />
+        <path class="t fin" pathLength="1" d="M560 96 V80 M560 204 V220 M506 150 H490 M614 150 H630" />
       </g>
+      <path class="t" pathLength="1" d="M40 860 L200 700 L250 730 L420 470 L470 510 L640 160 L760 400" />
+      <path class="t fin" pathLength="1" d="M230 760 l26 -26 M440 540 l26 -30 M480 580 l30 -34 M660 300 l24 -28 M690 360 l26 -30" />
+      <path class="t fin" pathLength="1" d="M20 860 H780" />
 
-      <path class="massif t" pathLength="1" d="M0 900 L110 770 L170 800 L280 610 L330 650 L440 430 L500 480 L590 250 L640 290 L720 80 L800 190 V900 Z" />
-      <!-- hachures façon gravure sur les flancs -->
-      <path class="t hachures" pathLength="1" d="M150 830 l30 -36 M200 850 l40 -48 M300 700 l34 -40 M340 740 l44 -52 M470 540 l36 -44 M520 580 l46 -56 M620 360 l34 -42 M660 410 l46 -56 M740 200 l30 -40 M760 280 l34 -46" />
-      <!-- objets empilés dans la pente : tuyau, commode, rocher, caisse -->
-      <path class="t" pathLength="1" d="M200 772 h82 v20 h-82 Z M220 772 v20 M262 772 v20" />
-      <path class="t" pathLength="1" d="M352 610 l56 -32 l13 22 l-56 32 Z" />
-      <path class="t" pathLength="1" d="M462 528 q22 -34 56 -12 q22 22 -10 44 q-34 12 -46 -32 Z" />
-      <path class="t" pathLength="1" d="M556 392 h52 v44 h-52 Z M556 414 h52 M582 392 v44" />
-      <path class="t" pathLength="1" d="M650 236 q12 -26 38 -12 q18 16 -4 30 q-26 8 -34 -18 Z" />
+      <!-- rail invisible : le chemin du grimpeur, posé sur la crête -->
+      <path class="rail" d="M60 838 L200 698 L250 728 L420 468 L470 508 L638 160" />
 
-      <!-- rail invisible : le chemin du grimpeur -->
-      <path class="rail" d="M70 840 C150 790 220 720 280 650 S400 510 450 470 S560 320 600 280 S690 140 720 96" />
-
-      <!-- Le grimpeur : buste nu, chaudron en bulbe, long marteau -->
+      <!-- Le grimpeur, en quelques traits : chaudron, buste, marteau -->
       <g class="grimpeur">
         <g class="grimpeur-corps">
-          <!-- buste large et légèrement penché, tête chauve de profil, barbe -->
-          <path class="peau" d="M-16 -44 C-20 -58 -21 -68 -15 -75 C-8 -80 10 -80 17 -74 C21 -66 19 -56 16 -44 Z" />
-          <path class="peau" d="M-4 -80 V-86 H6 V-80 Z" />
-          <path class="peau tete" d="M0 -107 C9 -107 12 -100 12 -95 L15 -91 L12 -89 C11 -85 6 -83 0 -83 C-6 -83 -11 -86 -11 -93 C-11 -101 -8 -107 0 -107 Z" />
-          <path class="barbe" d="M-6 -90 Q-4 -82 3 -82 Q10 -83 12 -89 Q6 -86 1 -87 Q-3 -87 -6 -90 Z" />
-          <path class="oreille" d="M-3 -96 q-4 0 -4 4 q0 4 4 4" />
-          <!-- bras tendus et marteau : pivotent autour des épaules -->
+          <path class="g-fond" d="M-16 -30 C-26 -24 -26 -6 -14 -1 C-6 2 6 2 14 -1 C26 -6 26 -24 16 -30 Z" />
+          <path d="M-16 -30 C-26 -24 -26 -6 -14 -1 C-6 2 6 2 14 -1 C26 -6 26 -24 16 -30 Z" />
+          <path d="M-19 -31 H19" />
+          <path d="M-10 -31 C-12 -40 -10 -48 0 -50 C10 -48 12 -40 10 -31" />
+          <path class="g-fond" d="M0 -60 m-7 0 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0" />
+          <path d="M0 -60 m-7 0 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0" />
           <g class="bras">
-            <path class="manche" d="M4 -53 L80 -106" />
-            <path class="marteau-tete" d="M72 -120 L92 -100 L86 -94 L66 -114 Z M82 -110 L98 -126" />
-            <path class="membre-contour" d="M-11 -72 Q4 -58 18 -62 M11 -73 Q22 -66 27 -68" />
-            <path class="membre" d="M-11 -72 Q4 -58 18 -62 M11 -73 Q22 -66 27 -68" />
-            <path class="main" d="M18 -62 m-3.5 0 a3.5 3.5 0 1 0 7 0 a3.5 3.5 0 1 0 -7 0 M27 -68 m-3.5 0 a3.5 3.5 0 1 0 7 0 a3.5 3.5 0 1 0 -7 0" />
+            <path d="M-6 -44 L14 -40" />
+            <path class="manche" d="M4 -34 L54 -70" />
+            <path d="M48 -80 L62 -64" />
           </g>
-          <!-- chaudron -->
-          <path class="chaudron" d="M-17 -42 C-34 -36 -38 -14 -28 -3 C-18 6 18 6 28 -3 C38 -14 34 -36 17 -42 Z" />
-          <path class="chaudron-bord" d="M-20 -46 H20 Q22 -46 22 -43 V-40 Q22 -38 20 -38 H-20 Q-22 -38 -22 -40 V-43 Q-22 -46 -20 -46 Z" />
-          <path class="reflet" d="M-22 -24 Q-24 -12 -16 -6" />
         </g>
       </g>
     </g>
 
-    <!-- ============ Tableau : le monde sans chute (chapitre III) ============ -->
+    <!-- ============ Le monde sans chute (chapitre III) ============ -->
     <g class="tableau" data-scenes="2">
-      <!-- ascenseur -->
-      <path class="t" pathLength="1" d="M110 190 H310 V560 H110 Z M210 230 V560 M130 230 H290" />
-      <path class="t" pathLength="1" d="M195 160 l15 -18 l15 18 M195 168 h30" />
-      <path class="t" pathLength="1" d="M330 340 h22 v22 h-22 Z M341 344 v14 M335 352 l6 6 l6 -6" />
-      <!-- Ctrl + Z -->
-      <path class="t" pathLength="1" d="M640 200 A92 92 0 1 0 520 130" />
-      <path class="t" pathLength="1" d="M520 130 L500 172 M520 130 L564 140" />
-      <path class="t" pathLength="1" d="M440 300 h260 a18 18 0 0 1 18 18 v66 a18 18 0 0 1 -18 18 h-260 a18 18 0 0 1 -18 -18 v-66 a18 18 0 0 1 18 -18 Z" />
-      <text x="570" y="364" class="touche">Ctrl + Z</text>
-      <!-- repère GPS -->
-      <path class="t" pathLength="1" d="M560 640 C520 590 506 560 506 530 A54 54 0 1 1 614 530 C614 560 600 590 560 640 Z M560 530 m-18 0 a18 18 0 1 0 36 0 a18 18 0 1 0 -36 0" />
-      <!-- canapé -->
-      <path class="t" pathLength="1" d="M100 800 V720 Q100 690 130 690 H420 Q450 690 450 720 V800 M130 800 V750 H420 V800 M80 800 H470 M110 820 V800 M440 820 V800" />
-      <path class="t hachures" pathLength="1" d="M150 740 q30 -20 60 0 M250 740 q30 -20 60 0 M340 740 q30 -20 60 0" />
+      <path class="t" pathLength="1" d="M520 380 A130 130 0 1 0 330 300" />
+      <path class="t" pathLength="1" d="M330 300 L306 352 M330 300 L384 314" />
+      <path class="t fin" pathLength="1" d="M270 560 h260 a14 14 0 0 1 14 14 v62 a14 14 0 0 1 -14 14 h-260 a14 14 0 0 1 -14 -14 v-62 a14 14 0 0 1 14 -14 Z" />
+      <text x="400" y="618" class="touche">Ctrl + Z</text>
     </g>
 
-    <!-- ============ Tableau : l'homme dans la jarre (chapitre IV) ============ -->
+    <!-- ============ L'homme dans la jarre (chapitre IV) ============ -->
     <g class="tableau" data-scenes="3">
-      <!-- soleil -->
-      <path class="t" pathLength="1" d="M200 190 m-56 0 a56 56 0 1 0 112 0 a56 56 0 1 0 -112 0" />
-      <path class="t" pathLength="1" d="M200 100 V72 M200 280 V308 M110 190 H82 M290 190 H318 M136 126 L116 106 M264 254 L284 274 M136 254 L116 274 M264 126 L284 106" />
-      <!-- la jarre couchée, une tête à l'ouverture -->
-      <path class="t" pathLength="1" d="M140 700 C120 610 200 540 320 536 C430 532 520 560 560 610 L560 730 C520 780 430 800 320 796 C200 792 150 760 140 700 Z" />
-      <path class="t" pathLength="1" d="M560 600 Q590 600 590 620 V720 Q590 740 560 740" />
-      <path class="t hachures" pathLength="1" d="M200 600 Q330 580 460 590 M180 700 Q330 690 520 700 M210 770 l16 -16 M250 784 l16 -16 M290 790 l16 -16" />
-      <path class="t" pathLength="1" d="M612 668 m-26 0 a26 26 0 1 0 52 0 a26 26 0 1 0 -52 0 M598 686 Q612 712 628 686" />
-      <path class="t" pathLength="1" d="M60 800 H760" />
-      <!-- le conquérant, debout devant le soleil -->
-      <g class="element" data-scenes="3">
-        <path class="t conquerant" pathLength="1" d="M420 300 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 M396 292 Q418 244 452 290 M420 324 L372 560 H468 Z M496 230 V580 M486 246 L496 220 L506 246" />
-      </g>
+      <path class="t" pathLength="1" d="M560 200 m-44 0 a44 44 0 1 0 88 0 a44 44 0 1 0 -88 0" />
+      <path class="t fin" pathLength="1" d="M560 128 V108 M560 272 V292 M488 200 H468 M632 200 H652 M509 149 L495 135 M611 251 L625 265 M509 251 L495 265 M611 149 L625 135" />
+      <path class="t" pathLength="1" d="M330 420 Q240 500 260 640 Q280 760 380 780 Q480 760 500 640 Q520 500 430 420 Z" />
+      <path class="t" pathLength="1" d="M322 420 H438 M332 404 H428" />
+      <path class="t fin" pathLength="1" d="M276 560 Q380 586 484 560" />
+      <path class="t fin" pathLength="1" d="M160 790 H640" />
     </g>
 
-    <!-- ============ Tableau : fragile, robuste, plus fort (chapitre V) ============ -->
-    <g class="tableau socles" data-scenes="4">
-      <!-- trois socles de musée -->
-      <path class="t" pathLength="1" d="M90 560 H230 V780 H90 Z M80 560 H240 M80 780 H240" />
-      <path class="t" pathLength="1" d="M330 560 H470 V780 H330 Z M320 560 H480 M320 780 H480" />
-      <path class="t" pathLength="1" d="M570 560 H710 V780 H570 Z M560 560 H720 M560 780 H720" />
-      <!-- le verre fêlé -->
-      <path class="t" pathLength="1" d="M120 380 Q120 470 160 482 Q200 470 200 380 Z M160 482 V540 M128 548 H192" />
-      <path class="t fissure" pathLength="1" d="M148 396 L162 418 L148 436 L158 452 M182 390 L172 412" />
-      <!-- le caillou -->
-      <path class="t" pathLength="1" d="M346 548 Q334 490 378 470 Q432 448 458 492 Q474 534 446 548 Z" />
-      <path class="t hachures" pathLength="1" d="M366 520 l14 -14 M392 530 l18 -18 M420 528 l16 -16" />
-      <!-- l'hydre : une tête coupée, deux qui repoussent -->
-      <path class="t" pathLength="1" d="M640 548 C626 470 580 450 572 390 M640 548 C640 470 650 430 638 370 M640 548 C656 470 700 456 712 404" />
-      <path class="t" pathLength="1" d="M572 390 m-13 0 a13 13 0 1 0 26 0 a13 13 0 1 0 -26 0 M638 370 m-13 0 a13 13 0 1 0 26 0 a13 13 0 1 0 -26 0" />
-      <path class="t repousse" pathLength="1" d="M712 404 L690 352 M712 404 L742 356 M690 352 m-11 0 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0 M742 356 m-11 0 a11 11 0 1 0 22 0 a11 11 0 1 0 -22 0" />
-      <path class="t coupure" pathLength="1" d="M694 430 L732 418" />
-      <text x="160" y="680" class="etiquette">Fragile</text>
-      <text x="400" y="680" class="etiquette">Robuste</text>
-      <text x="640" y="680" class="etiquette">Plus fort</text>
+    <!-- ============ Fragile, robuste, plus fort (chapitre V) ============ -->
+    <g class="tableau" data-scenes="4">
+      <path class="t fin" pathLength="1" d="M110 560 H210 V760 H110 Z M350 560 H450 V760 H350 Z M590 560 H690 V760 H590 Z" />
+      <!-- verre fêlé -->
+      <path class="t" pathLength="1" d="M130 410 Q130 480 160 488 Q190 480 190 410 Z M160 488 V540 M136 548 H184" />
+      <path class="t fin" pathLength="1" d="M152 424 L164 444 L154 460 M176 418 L170 436" />
+      <!-- caillou -->
+      <path class="t" pathLength="1" d="M360 548 Q352 500 388 486 Q428 472 446 506 Q456 538 436 548 Z" />
+      <!-- hydre : une tête coupée, deux qui repoussent -->
+      <path class="t" pathLength="1" d="M640 548 C628 488 600 470 596 420 M640 548 C640 488 646 456 640 410 M640 548 C652 488 676 474 684 436" />
+      <path class="t fin repousse" pathLength="1" d="M684 436 L670 400 M684 436 L704 402" />
+      <text x="160" y="664" class="etiquette">Fragile</text>
+      <text x="400" y="664" class="etiquette">Robuste</text>
+      <text x="640" y="664" class="etiquette">Plus fort</text>
     </g>
   </svg>
 </div>

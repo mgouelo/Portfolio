@@ -1334,33 +1334,17 @@ main {
 .scene-fond .vu .t:nth-of-type(3n) {
   transition-delay: 0.75s;
 }
-.scene-fond .hachures {
+.scene-fond .fin {
   stroke-width: 1;
-  opacity: 0.55;
-}
-.scene-fond .coupure {
-  stroke-dasharray: 0.08 0.05;
+  opacity: 0.6;
 }
 .scene-fond .repousse {
   transition-delay: 1.4s !important;
 }
-.scene-fond .conquerant {
-  stroke: var(--texte);
-  transition-delay: 0.9s !important;
-}
-
-/* La montagne bordeaux */
-.montagne .massif {
-  fill: color-mix(in srgb, var(--accent-profond) 55%, transparent);
-  stroke-width: 2;
-}
-:root.light .montagne .massif {
-  fill: color-mix(in srgb, var(--accent-profond) 22%, transparent);
-}
 
 .touche {
-  font: 600 34px var(--sans);
-  fill: var(--accent);
+  font: 500 26px var(--sans);
+  fill: var(--texte-doux);
   text-anchor: middle;
   letter-spacing: 0.04em;
 }
@@ -1379,59 +1363,17 @@ main {
   opacity: 1;
 }
 
-/* Le grimpeur (silhouette inspirée du jeu) */
-.grimpeur .peau {
-  fill: var(--passe-partout);
-  stroke: var(--cadre);
-  stroke-width: 1.4;
+/* Le grimpeur, au trait */
+.grimpeur path {
+  stroke: var(--texte);
+  stroke-width: 1.6;
 }
-.grimpeur .tete {
-  stroke-width: 1.4;
-}
-.grimpeur .barbe {
-  fill: #2a1d18;
-  stroke: #2a1d18;
-  stroke-width: 1;
-}
-.grimpeur .oreille {
-  stroke: var(--cadre);
-  stroke-width: 1.2;
-}
-.grimpeur .membre-contour {
-  stroke: var(--cadre);
-  stroke-width: 9;
-}
-.grimpeur .membre {
-  stroke: var(--passe-partout);
-  stroke-width: 6.5;
-}
-.grimpeur .main {
-  fill: var(--passe-partout);
-  stroke: var(--cadre);
-  stroke-width: 1.2;
+.grimpeur .g-fond {
+  fill: var(--mur);
+  stroke: none;
 }
 .grimpeur .manche {
-  stroke: #c9a24a;
-  stroke-width: 4.5;
-}
-.grimpeur .marteau-tete {
-  fill: #8b8b8b;
-  stroke: #5a5a5a;
-  stroke-width: 1.4;
-}
-.grimpeur .chaudron {
-  fill: #121010;
-  stroke: #000;
-  stroke-width: 1.4;
-}
-.grimpeur .chaudron-bord {
-  fill: #1e1b1b;
-  stroke: #000;
-  stroke-width: 1.4;
-}
-.grimpeur .reflet {
-  stroke: rgba(255, 255, 255, 0.28);
-  stroke-width: 2;
+  stroke: var(--accent);
 }
 
 .recit-fin {

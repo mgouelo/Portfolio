@@ -94,14 +94,14 @@ if (recit && texte && svg) {
     vise.f = interpoler(trajets[Math.min(s, trajets.length - 1)], p);
     vise.rot = rotation(s, p);
     // Le marteau se balance au rythme du scroll, comme un grimpeur qui cherche sa prise
-    vise.balancier = Math.sin(window.scrollY / 110) * 34;
+    vise.balancier = Math.sin(window.scrollY / 110) * 26;
   };
 
   const dessiner = () => {
     const pt = rail.getPointAtLength(affiche.f * longueur);
-    grimpeur.setAttribute('transform', `translate(${pt.x.toFixed(2)} ${pt.y.toFixed(2)}) scale(1.7)`);
-    corps.setAttribute('transform', `rotate(${affiche.rot.toFixed(2)} 0 -22)`);
-    bras.setAttribute('transform', `rotate(${affiche.balancier.toFixed(2)} 0 -70)`);
+    grimpeur.setAttribute('transform', `translate(${pt.x.toFixed(2)} ${pt.y.toFixed(2)}) scale(1.8)`);
+    corps.setAttribute('transform', `rotate(${affiche.rot.toFixed(2)} 0 -15)`);
+    bras.setAttribute('transform', `rotate(${affiche.balancier.toFixed(2)} 0 -44)`);
   };
 
   // 4. Boucle d'animation : on rapproche l'affichage de la cible à chaque image
