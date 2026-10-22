@@ -1,0 +1,10 @@
+---
+import data from '../data/citations.json';
+// La première citation est rendue côté serveur, le script en tire une au hasard à chaque visite.
+const [premiere] = data.citations;
+---
+<figure class="citation reveal" data-citations={JSON.stringify(data.citations)}>
+  <span class="citation-mark" aria-hidden="true">“</span>
+  <blockquote><p class="citation-texte">{premiere.texte}</p></blockquote>
+  <figcaption class="citation-auteur">{premiere.auteur}</figcaption>
+</figure>

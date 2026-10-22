@@ -1,0 +1,19 @@
+---
+// Le cartel : la petite étiquette posée à côté d'une œuvre au musée.
+interface Props {
+  numero: number;
+  title: string;
+  annee: number;
+  technologies: string[];
+  resume?: string;
+  titleTag?: 'h1' | 'h3';
+}
+const { numero, title, annee, technologies, resume, titleTag: Titre = 'h3' } = Astro.props;
+---
+<div class="cartel">
+  <p class="cartel-numero">N° {String(numero).padStart(2, '0')}</p>
+  <Titre class="cartel-titre">{title}<span class="cartel-annee">, {annee}</span></Titre>
+  <p class="cartel-technique"><span>Technique</span> {technologies.join(', ')}</p>
+  {resume && <p class="cartel-resume">{resume}</p>}
+  <slot />
+</div>

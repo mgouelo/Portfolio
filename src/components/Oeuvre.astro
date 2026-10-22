@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Cartel from './Cartel.astro';
+import { asset } from '../lib/asset';
+
+interface Props {
+  projet: CollectionEntry<'projets'>;
+  numero: number;
+}
+const { projet, numero } = Astro.props;
+const { title, annee, resume, image, imageAlt, technologies, lien } = projet.data;
+const page = asset(`projets/${projet.id}/`);
+---
+<article class="oeuvre reveal">
+  <a class="cadre" href={page} aria-label={`Voir l'œuvre ${title}`}>
+    <div class="passe-partout">
+      <img src={asset(image)} alt={imageAlt} loading="lazy" style={`view-transition-name: oeuvre-${projet.id}`} />
+    </div>
+    <span class="spot" aria-hidden="true"></span>
+  </a>
+  <Cartel numero={numero} title={title} annee={annee} technologies={technologies} resume={resume}>
+    <p class="cartel-liens">
+      <a href={page}>Voir l'œuvre <span aria-hidden="true">→</span></a>
+      {lien && <a href={lien} target="_blank" rel="noreferrer">Code source <span aria-hidden="true">↗</span></a>}
+    </p>
+  </Cartel>
+</article>

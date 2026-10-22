@@ -1,0 +1,32 @@
+---
+import data from '../data/competences.json';
+import { asset } from '../lib/asset';
+
+const romains = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+---
+<ul class="plaques">
+  {data.competences.map((c, i) => (
+    <li class="plaque reveal" style={`--delai:${i * 70}ms`}>
+      <span class="plaque-romain">{romains[i]}</span>
+      <svg class="plaque-icone" viewBox="0 0 24 24" aria-hidden="true"><path d={c.icone} /></svg>
+      <h3 class="plaque-nom">{c.nom}</h3>
+      <ul class="niveaux">
+        {c.niveaux.map((n) =>
+          'page' in n && n.page ? (
+            <li><a class="niveau" href={asset(n.page)} data-modal-src={asset(n.page)} data-modal-title={`${c.nom} · ${n.nom}`}>{n.nom}</a></li>
+          ) : (
+            <li><span class="niveau niveau-a-venir" title="En cours d'acquisition">{n.nom}</span></li>
+          )
+        )}
+      </ul>
+    </li>
+  ))}
+</ul>
+
+<dialog class="modal" id="skill-modal" aria-labelledby="modal-title">
+  <div class="modal-tete">
+    <h3 id="modal-title" class="modal-titre">Détail</h3>
+    <button class="modal-fermer" type="button" aria-label="Fermer" data-modal-close>×</button>
+  </div>
+  <iframe class="modal-iframe" title="Détail de la compétence"></iframe>
+</dialog>

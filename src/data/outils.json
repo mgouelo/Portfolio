@@ -1,0 +1,15 @@
+{
+  "outils": [
+    { "nom": "Git", "icone": "/assets/tool-git.svg" },
+    { "nom": "Python", "icone": "/assets/tool-python.svg" },
+    { "nom": "Flask", "icone": "/assets/tool-flask.svg" },
+    { "nom": "MySQL", "icone": "/assets/tool-mysql.svg" },
+    { "nom": "Java", "icone": "/assets/tool-java.svg" },
+    { "nom": "PHP", "icone": "/assets/tool-php.svg" },
+    { "nom": "HTML", "icone": "/assets/tool-html.svg" },
+    { "nom": "CSS", "icone": "/assets/tool-css.svg" },
+    { "nom": "JavaScript", "icone": "/assets/tool-js.svg" },
+    { "nom": "C++", "icone": "/assets/tool-cpp.svg" },
+    { "nom": "Qt", "icone": "/assets/tool-qt.svg" }
+  ]
+}
