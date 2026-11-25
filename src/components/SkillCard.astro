@@ -1,0 +1,23 @@
+---
+import { asset } from '../lib/asset';
+
+interface Props {
+  titre: string;
+  accent: string;
+  icone: string;
+  niveaux: { nom: string; couleur: string; page: string }[];
+}
+
+const { titre, accent, icone, niveaux } = Astro.props;
+---
+<article class="skill-card" style={`--accent:${accent}`}>
+  <div class="skill-icon">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icone} /></svg>
+  </div>
+  <h3 class="skill-title">{titre}</h3>
+  <ul class="badges">
+    {niveaux.map((n) => (
+      <li><a href={asset(n.page)} class={`badge ${n.couleur}`} data-modal-src={asset(n.page)}>{n.nom}</a></li>
+    ))}
+  </ul>
+</article>

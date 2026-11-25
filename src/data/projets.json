@@ -1,0 +1,33 @@
+[
+  {
+    "titre": "YOUFILE",
+    "lien": "https://github.com/mgouelo/YouFile",
+    "liseré": "blue",
+    "variante": "youfile",
+    "image": "assets/Mockup-youfile.png",
+    "alt": "Mockup projet YouFile",
+    "imageAvant": true,
+    "description": "YouFile est un site web de partage de fichiers inspiré de Youtube. L'objectif est de faciliter le partage de fichiers en ligne grâce à un système de compte utilisateur ainsi qu'à des notes et des commentaires pour chaque fichier.",
+    "badges": [
+      { "nom": "Python", "couleur": "darkblue" },
+      { "nom": "HTML", "couleur": "blue" },
+      { "nom": "CSS", "couleur": "skyblue" },
+      { "nom": "MySQL", "couleur": "green" }
+    ]
+  },
+  {
+    "titre": "AMBULYMPICS",
+    "lien": "https://github.com/mgouelo/AmbuLympics",
+    "liseré": "red",
+    "variante": "ambu",
+    "image": "assets/Mockup-Ambulympics-cut.png",
+    "alt": "Mockup projet AmbuLympics",
+    "imageAvant": false,
+    "description": "En réponse à la gestion défectueuse des secouristes durant les JO de Paris 2024, j'ai créer une app mobile permettant aux secouristes de consulter et gérer leur emploie du temps, recevoir des alertes, et contacter des administrateurs",
+    "badges": [
+      { "nom": "Java", "couleur": "darkblue" },
+      { "nom": "JavaFX", "couleur": "blue" },
+      { "nom": "MySQL", "couleur": "skyblue" }
+    ]
+  }
+]

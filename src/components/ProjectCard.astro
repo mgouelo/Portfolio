@@ -1,0 +1,34 @@
+---
+import { asset } from '../lib/asset';
+
+interface Props {
+  titre: string;
+  lien: string;
+  liseré: string;
+  variante: string;
+  image: string;
+  alt: string;
+  imageAvant: boolean;
+  description: string;
+  badges: { nom: string; couleur: string }[];
+}
+
+const { titre, lien, liseré, variante, image, alt, imageAvant, description, badges } = Astro.props;
+---
+<a href={lien} target="_blank" class="project-link">
+  <article class="project-card">
+    <div class={`project-accent-${liseré}`}></div>
+
+    <div class="project-body">
+      <h3 class="project-title">{titre}</h3>
+      <div class="project-content">
+        {imageAvant && <img src={asset(image)} alt={alt} class={`project-mockup-${variante}`} />}
+        <p class={`project-desc-${variante}`}>{description}</p>
+        {!imageAvant && <img src={asset(image)} alt={alt} class={`project-mockup-${variante}`} />}
+      </div>
+      <ul class="badges">
+        {badges.map((b) => <li class={`badge ${b.couleur}`}>{b.nom}</li>)}
+      </ul>
+    </div>
+  </article>
+</a>
